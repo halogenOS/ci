@@ -49,14 +49,15 @@ echo "Doing boostrap sync..."
 repo sync -c --no-tags build/make external/xos
 
 '''
-          retry(count: 4) {
-            echo 'Syncing sources...'
-            sh '''source build/envsetup.sh
+            retry(count: 4) {
+              echo 'Syncing sources...'
+              sh '''source build/envsetup.sh
 reposync'''
-          }
-          retry(count: 2) {
-            sh '''source build/envsetup.sh
+            }
+            retry(count: 2) {
+              sh '''source build/envsetup.sh
 breakfast $Device'''
+            }
           }
         }
       }
