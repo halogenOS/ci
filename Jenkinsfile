@@ -30,7 +30,10 @@ chmod a+x bin/repo'''
           sh 'export PATH="$(pwd)/bin:$PATH"'
           echo 'Initializing source tree...'
           dir(path: 'src') {
-            sh 'repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION'
+            sh '''if [ ! -f .repo ]; then
+  repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION'
+fi
+'''
           }
         }
       }
