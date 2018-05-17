@@ -40,7 +40,8 @@ chmod a+x bin/repo'''
         echo 'Syncing...'
         dir(path: '/mnt/building/jws/xos') {
           dir(path: 'src') {
-            sh '''if [ -d build/make -a -d external/xos ]; then
+            sh '''set +x
+if [ -d build/make -a -d external/xos ]; then
 echo "Bootstrap sync not necessary."
 exit 0
 fi
@@ -51,11 +52,14 @@ repo sync -c --no-tags build/make external/xos
 '''
             retry(count: 4) {
               echo 'Syncing sources...'
-              sh '''source build/envsetup.sh
+              sh '''set +x
+source build/envsetup.sh
 reposync'''
             }
             retry(count: 2) {
-              sh '''source build/envsetup.sh
+              echo 'Syncing device trees...'
+              sh '''set +x
+source build/envsetup.sh
 breakfast $Device'''
             }
           }
@@ -67,7 +71,8 @@ breakfast $Device'''
         echo 'Building...'
         dir(path: '/mnt/building/jws/xos') {
           dir(path: 'src') {
-            sh '''source build/envsetup.sh
+            sh '''set +x
+source build/envsetup.sh
 build full XOS_$device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
         }
