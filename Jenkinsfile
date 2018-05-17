@@ -12,12 +12,12 @@ done'''
       }
     }
     stage('Prepare') {
-        steps {
-          echo 'Preparing...'
-          echo 'Making directories...'
-          sh 'mkdir -p src bin'
-          echo 'Downloading tools...'
-          sh '''if [ -x bin/repo ]; then
+      steps {
+        echo 'Preparing...'
+        echo 'Making directories...'
+        sh 'mkdir -p src bin'
+        echo 'Downloading tools...'
+        sh '''if [ -x bin/repo ]; then
 exit 0
 fi
 
@@ -25,12 +25,11 @@ echo "Downloading repo..."
 
 curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
 chmod a+x bin/repo'''
-          echo 'Setting path'
-          sh 'export PATH="$(pwd)/bin:$PATH"'
-          echo 'Initializing source tree...'
-          dir(path: 'src') {
-            sh 'repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION'
-          }
+        echo 'Setting path'
+        sh 'export PATH="$(pwd)/bin:$PATH"'
+        echo 'Initializing source tree...'
+        dir(path: 'src') {
+          sh 'repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION'
         }
       }
     }
@@ -60,7 +59,6 @@ reposync'''
             sh '''source build/envsetup.sh
 breakfast $Device'''
           }
-
         }
       }
     }
