@@ -27,7 +27,7 @@ curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
 chmod a+x bin/repo'''
         echo 'Setting path'
         sh 'export PATH="$(pwd)/bin:$PATH"'
-        echo 'Shifting bash down a gear so that it does not spam the console with everything it is doing"
+        echo 'Shifting bash down a gear so that it does not spam the console with everything it is doing'
         set +x
         echo 'Initializing source tree...'
         dir(path: 'src') {
