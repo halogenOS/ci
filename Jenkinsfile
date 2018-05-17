@@ -27,12 +27,12 @@ curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
 chmod a+x bin/repo'''
         echo 'Setting path'
         sh 'export PATH="$(pwd)/bin:$PATH"'
-        echo 'Shifting bash down a gear so that it does not spam the console with everything it is doing'
-        sh 'set +x'
         echo 'Initializing source tree...'
         dir(path: 'src') {
           sh 'repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION'
         }
+
+        dir(path: '/mnt/building/jws/xos')
       }
     }
     stage('Sync') {
@@ -49,19 +49,24 @@ repo sync -c --no-tags build/make external/xos
 
 '''
         }
+
         dir(path: 'src') {
           retry(count: 4) {
             echo 'Syncing sources...'
             sh '''source build/envsetup.sh
 reposync'''
           }
+
         }
+
         dir(path: 'src') {
           retry(count: 2) {
             sh '''source build/envsetup.sh
 breakfast $Device'''
           }
+
         }
+
       }
     }
     stage('Build') {
@@ -71,6 +76,7 @@ breakfast $Device'''
           sh '''source build/envsetup.sh
 build full XOS_$device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
         }
+
       }
     }
   }
