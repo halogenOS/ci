@@ -12,7 +12,7 @@ done'''
       }
     }
     stage('Prepare') {
-      script {
+      parallel {
         stage('Prepare') {
           steps {
             echo 'Preparing...'
@@ -51,7 +51,7 @@ chmod a+x bin/repo'''
       }
     }
     stage('Sync') {
-      script {
+      parallel {
         stage('Sync') {
           steps {
             echo 'Syncing...'
@@ -101,7 +101,7 @@ breakfast $Device'''
       }
     }
     stage('Build') {
-      script {
+      parallel {
         stage('Build') {
           steps {
             echo 'Building...'
