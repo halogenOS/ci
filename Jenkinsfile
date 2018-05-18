@@ -31,11 +31,13 @@ chmod a+x bin/repo'''
           echo 'Initializing source tree...'
           dir(path: 'src') {
             sh '''if [ ! -f .repo ]; then
-  repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION'
+  repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION\'
 fi
 '''
           }
+
         }
+
       }
     }
     stage('Sync') {
@@ -43,7 +45,8 @@ fi
         echo 'Syncing...'
         dir(path: '/mnt/building/jws/xos') {
           dir(path: 'src') {
-            sh '''set +x
+            retry(count: 3) {
+              sh '''set +x
 if [ -d build/make -a -d external/xos ]; then
 echo "Bootstrap sync not necessary."
 exit 0
@@ -53,20 +56,34 @@ echo "Doing boostrap sync..."
 repo sync -c --no-tags build/make external/xos
 
 '''
+            }
+
             retry(count: 4) {
               echo 'Syncing sources...'
               sh '''set +x
 source build/envsetup.sh
 reposync'''
             }
+
             retry(count: 2) {
               echo 'Syncing device trees...'
               sh '''set +x
-source build/envsetup.sh
-breakfast $Device'''
+if ! type breakfast 2>&1 >/dev/null; then
+  source build/envsetup.sh
+fi
+set +e
+breakfast "$Device"
+set -e
+echo "Checking if everything is alright..."
+if ! find device -name "$Device" -type d -mindepth 2 -maxdepth 2; then
+  exit 1
+fi'''
             }
+
           }
+
         }
+
       }
     }
     stage('Build') {
@@ -78,7 +95,9 @@ breakfast $Device'''
 source build/envsetup.sh
 build full XOS_$device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
+
         }
+
       }
     }
   }
