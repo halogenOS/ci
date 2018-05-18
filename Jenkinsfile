@@ -129,7 +129,7 @@ LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n 
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'oneplus2'
-    Clean = 'true'
+    Clean = 'false'
     _JAVA_OPTIONS = '-Xmx8G'
   }
 }
