@@ -21,11 +21,14 @@ done
           echo 'Checking Python'
           sh '''
 if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
+  echo "Found Python 3, but need 2. Trying to find a solution..."
   if ! hash python2; then
     echo "Need Python 2"
     exit 1
   else
+    echo "Symlinking python2 to bin/python"
     ln -sf $(which python2) bin/python
+    python --version
   fi
 fi'''
           echo 'Downloading tools...'
