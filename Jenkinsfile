@@ -111,8 +111,13 @@ fi'''
         dir(path: '/mnt/building/jws/xos') {
           dir(path: 'src') {
             sh '''set +x
-export PATH="$(pwd)/bin:$PATH"
 source build/envsetup.sh
+export PATH="$(pwd)/bin:$PATH"
+
+if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
+  echo "Woops... How could this happen? Python 2 is what AOSP needs. :/"
+  exit 1
+fi
 build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
 
