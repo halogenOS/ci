@@ -6,9 +6,10 @@ pipeline {
         isUnix()
         sh '''set -e
 
-for command in git curl wget make; do
+for command in git curl wget make python; do
   hash $command
-done'''
+done
+'''
       }
     }
     stage('Prepare') {
@@ -17,6 +18,16 @@ done'''
         dir(path: '/mnt/building/jws/xos') {
           echo 'Making directories...'
           sh 'mkdir -p src bin'
+          echo 'Checking Python'
+          sh '''
+if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
+  if ! hash python2; then
+    echo "Need Python 2"
+    exit 1
+  else
+    ln -sf $(type python2) bin/python
+  fi
+fi'''
           echo 'Downloading tools...'
           sh '''if [ -x bin/repo ]; then
 exit 0
