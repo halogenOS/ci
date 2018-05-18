@@ -19,7 +19,7 @@ done
           echo 'Making directories...'
           sh 'mkdir -p src bin'
           echo 'Checking Python'
-          sh '''
+          sh '''export PATH="$(pwd)/bin:$PATH"
 if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
   echo "Found Python 3, but need 2. Trying to find a solution..."
   if ! hash python2; then
@@ -44,7 +44,8 @@ chmod a+x bin/repo'''
           sh 'export PATH="$(pwd)/bin:$PATH"'
           echo 'Initializing source tree...'
           dir(path: 'src') {
-            sh '''if [ ! -d .repo ]; then
+            sh '''export PATH="$(pwd)/bin:$PATH"
+if [ ! -d .repo ]; then
   repo init -u git://github.com/halogenOS/android_manifest.git -b "$XOS_REVISION"
 fi
 '''
@@ -61,6 +62,8 @@ fi
           dir(path: 'src') {
             retry(count: 3) {
               sh '''set +x
+export PATH="$(pwd)/bin:$PATH"
+
 if [ -d build/make -a -d external/xos ]; then
 echo "Bootstrap sync not necessary."
 exit 0
@@ -75,6 +78,7 @@ repo sync -c --no-tags build/make external/xos
             retry(count: 4) {
               echo 'Syncing sources...'
               sh '''set +x
+export PATH="$(pwd)/bin:$PATH"
 source build/envsetup.sh
 reposync'''
             }
@@ -82,6 +86,7 @@ reposync'''
             retry(count: 2) {
               echo 'Syncing device trees...'
               sh '''set +x
+export PATH="$(pwd)/bin:$PATH"
 if ! type breakfast 2>&1 >/dev/null; then
   source build/envsetup.sh
 fi
@@ -106,6 +111,7 @@ fi'''
         dir(path: '/mnt/building/jws/xos') {
           dir(path: 'src') {
             sh '''set +x
+export PATH="$(pwd)/bin:$PATH"
 source build/envsetup.sh
 build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
