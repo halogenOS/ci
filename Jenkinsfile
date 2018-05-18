@@ -6,8 +6,8 @@ pipeline {
         isUnix()
         sh '''set -e
 
-for command in git curl wget make python which type [ [[ java; do
-  hash $command
+for command in git curl wget make python java type which [ [[; do
+  hash $command || type $command
 done
 '''
       }
