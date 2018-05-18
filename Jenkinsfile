@@ -112,7 +112,7 @@ fi'''
           dir(path: 'src') {
             sh '''set +x
 source build/envsetup.sh
-export PATH="$(pwd)/bin:$PATH"
+export PATH="$(realpath $(pwd -P)/..)/bin:$PATH"
 
 if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
   echo "Woops... How could this happen? Python 2 is what AOSP needs. :/"
