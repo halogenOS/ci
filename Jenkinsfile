@@ -6,7 +6,7 @@ pipeline {
         isUnix()
         sh '''set -e
 
-for command in git curl wget make python; do
+for command in git curl wget make python which type [ [[ java; do
   hash $command
 done
 '''
@@ -25,7 +25,7 @@ if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
     echo "Need Python 2"
     exit 1
   else
-    ln -sf $(type python2) bin/python
+    ln -sf $(which python2) bin/python
   fi
 fi'''
           echo 'Downloading tools...'
