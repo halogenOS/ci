@@ -93,7 +93,7 @@ fi'''
           dir(path: 'src') {
             sh '''set +x
 source build/envsetup.sh
-build full XOS_$device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
+build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
 
         }
