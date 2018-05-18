@@ -31,7 +31,7 @@ chmod a+x bin/repo'''
           echo 'Initializing source tree...'
           dir(path: 'src') {
             sh '''if [ ! -d .repo ]; then
-  repo init -u git://github.com/halogenOS/android_manifest.git -b $XOS_REVISION\'
+  repo init -u git://github.com/halogenOS/android_manifest.git -b "$XOS_REVISION"
 fi
 '''
           }
