@@ -105,5 +105,6 @@ build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean |
     XOS_REVISION = 'XOS-8.1'
     Device = 'oneplus2'
     Clean = 'true'
+    _JAVA_OPTIONS = '-Xmx8G'
   }
 }
