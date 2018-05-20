@@ -177,10 +177,12 @@ git tag $git_rel_tag && git push --tags
 
 echo "Starting release..."
 
-git_rel_filename="$(ls -c src/out/product/target/$Device/XOS*zip | head -n1)"
-git_rel_filename_sum="$(ls -c src/out/product/target/$Device/XOS*sum | head -n1)"
-git_rel_filepath="$(realpath src/out/prodcut/target/$Device/$git_rel_filename)"
-git_rel_sumpath="$(realpath src/out/prodcut/target/$Device/$git_rel_filename_sum)"
+full_out_path="$(realpath src/out/target/product/$Device)"
+
+git_rel_filename="$(ls -c $full_out_path/XOS*zip | head -n1)"
+git_rel_filename_sum="$(ls -c $full_out_path/XOS*sum | head -n1)"
+git_rel_filepath="$(realpath $full_out_path/$git_rel_filename)"
+git_rel_sumpath="$(realpath $full_out_path/$git_rel_filename_sum)"
 
 gothub release \\
     --user halogenOS \\
