@@ -10,6 +10,24 @@ for command in git curl wget make python java type which [ [[; do
   hash $command || type $command
 done
 '''
+        dir(path: '/mnt/building/jws/xos') {
+          sh '''echo "Preparing Go..."
+
+if [ ! -d go ]; then
+  echo "Downloading Go..."
+  curl https://dl.google.com/go/go1.10.2.linux-amd64.tar.gz 2>/dev/null | tar -xvz
+fi
+
+echo "Creating directories for Go..."
+mkdir -p gopath
+
+export GOROOT="$(pwd)/go"
+export GOPATH="$(pwd)/gopath"
+
+echo "Downloading additional tools..."
+go get -v github.com/itchio/gothub'''
+        }
+
       }
     }
     stage('Prepare') {
@@ -121,6 +139,73 @@ fi
 LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
 
+        }
+
+      }
+    }
+    stage('Upload') {
+      steps {
+        dir(path: '/mnt/building/jws/xos') {
+          sh '''set +x
+set -e
+
+if [ ! -f upload-creds ]; then
+  echo "Upload credentials not found, skipping upload"
+  exit 0
+fi
+
+source upload-creds
+
+export GOROOT="$(pwd)/go"
+export GOPATH="$(pwd)/gopath"
+export PATH="$GOPATH/bin"
+
+if [ -z "$BUILD_NUMBER" ]; then
+  BUILD_NUMBER=0
+fi
+
+if [ ! -d builds-git ]; then
+  git clone https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds builds-git
+fi
+
+cd builds-git
+
+git_rel_tag="tb$(date +%Y%m%d.%H%M.${BUILD_NUMBER}"
+git tag $git_rel_tag && git push --tags
+
+echo "Starting release..."
+
+git_rel_filename="$(ls -c src/out/product/target/$Device/XOS*zip | head -n1)"
+git_rel_filename_sum="$(ls -c src/out/product/target/$Device/XOS*sum | head -n1)"
+git_rel_filepath="$(realpath src/out/prodcut/target/$Device/$git_rel_filename)"
+git_rel_sumpath="$(realpath src/out/prodcut/target/$Device/$git_rel_filename_sum)"
+
+gothub release \\
+    --user halogenOS \\
+    --repo builds \\
+    --tag $git_rel_tag \\
+    --name "[Test build] $(date +%d/%m/%Y) for $Device" \\
+    --description "This is a TEST BUILD. Please do not use this unless you know what this means.\\n\\nChecksum ($(echo $git_rel_sumpath | cut -d \'.\' -f2)): $(<$git_rel_sumpath)" \\
+    --pre-release
+
+echo "Uploading build..."
+
+gothub upload \\
+    --user halogenOS \\
+    --repo builds \\
+    --tag $git_rel_tag \\
+    --name "$git_rel_filename" \\
+    --file "$git_rel_filepath"
+
+echo "Uploading checksum..."
+
+gothub upload \\
+    --user halogenOS \\
+    --repo builds \\
+    --tag $git_rel_tag \\
+    --name "$git_rel_filename_sum" \\
+    --file "$git_rel_sumpath"
+'''
         }
 
       }
