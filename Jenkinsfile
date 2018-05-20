@@ -140,7 +140,7 @@ fi
 
 source ../msg-lib
 
-msglib_send_message "Build $BUILD_NUMBER for $Device started"
+Device="$Device" msglib_send_message "Build $BUILD_NUMBER for $Device started"
 
 LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
@@ -195,11 +195,13 @@ gothub release \\
     --repo builds \\
     --tag $git_rel_tag \\
     --name "[Test build] $(date +%d/%m/%Y) for $Device" \\
-    --description "This is a TEST BUILD. Please do not use this unless you know what this means.\\n\\nChecksum ($(echo $git_rel_sumpath | cut -d \'.\' -f2)): $(<$git_rel_sumpath)" \\
+    --description "This is a TEST BUILD. Please do not use this unless you know what this means.
+
+Checksum ($(echo $git_rel_sumpath | cut -d \'.\' -f4)): $(echo $(<$git_rel_sumpath) | cut -d \' \' -f1)" \\
     --pre-release
 
 echo "Uploading build..."
-msglib_send_message "Uploading build $BUILD_NUMBER..."
+Device="$Device" msglib_send_message "Uploading build $BUILD_NUMBER..."
 
 gothub upload \\
     --user halogenOS \\
@@ -218,7 +220,7 @@ gothub upload \\
     --file "$git_rel_sumpath"
 
 
-msglib_send_message "New test build $(date +%d/%m/%Y) for $Device
+Device="$Device" msglib_send_message "New test build $(date +%d/%m/%Y) for $Device
 
 Download: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename
 "'''
