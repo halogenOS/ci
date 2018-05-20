@@ -166,7 +166,8 @@ if [ -z "$BUILD_NUMBER" ]; then
 fi
 
 if [ ! -d builds-git ]; then
-  git clone https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds builds-git
+  echo "Cloning builds repository..."
+  git clone https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds builds-git 2>/dev/null >/dev/null
 fi
 
 cd builds-git
