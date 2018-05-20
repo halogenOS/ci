@@ -159,11 +159,10 @@ if [ ! -f upload-creds ]; then
 fi
 
 source upload-creds
-source msg-lib
 
-export GOROOT="$(pwd)/go"
-export GOPATH="$(pwd)/gopath"
-export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+export GOROOT="$(pwd -P)/go"
+export GOPATH="$(pwd -P)/gopath"
+export PATH="$(pwd -P)/bin:$GOROOT/bin:$GOPATH/bin:$PATH"
 
 if [ -z "$BUILD_NUMBER" ]; then
   BUILD_NUMBER=0
