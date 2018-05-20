@@ -138,8 +138,10 @@ if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
   exit 1
 fi
 
+echo "Sourcing msglib"
 source ../msg-lib
 
+echo "Starting build..."
 Device="$Device" msglib_send_message "Build $BUILD_NUMBER for $Device started"
 
 LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
