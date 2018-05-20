@@ -138,11 +138,7 @@ if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
   exit 1
 fi
 
-echo "Sourcing msglib"
-source ../msg-lib
-
-echo "Starting build..."
-Device="$Device" msglib_send_message "Build $BUILD_NUMBER for $Device started"
+tgsendmsg "$Device" "Build $BUILD_NUMBER for $Device started"
 
 LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
@@ -203,7 +199,7 @@ Checksum ($(echo $git_rel_sumpath | cut -d \'.\' -f4)): $(echo $(<$git_rel_sumpa
     --pre-release
 
 echo "Uploading build..."
-Device="$Device" msglib_send_message "Uploading build $BUILD_NUMBER..."
+tgsendmsg "$Device" "Uploading build $BUILD_NUMBER..."
 
 gothub upload \\
     --user halogenOS \\
@@ -222,7 +218,7 @@ gothub upload \\
     --file "$git_rel_sumpath"
 
 
-Device="$Device" msglib_send_message "New test build $(date +%d/%m/%Y) for $Device
+tgsendmsg "$Device" "New test build $(date +%d/%m/%Y) for $Device
 
 Download: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename
 "'''
