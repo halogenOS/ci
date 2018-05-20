@@ -137,6 +137,11 @@ if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
   echo "Woops... How could this happen? Python 2 is what AOSP needs. :/"
   exit 1
 fi
+
+source ../msg-lib
+
+msglib_send_message "Build $BUILD_NUMBER for $Device started"
+
 LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
 
@@ -156,6 +161,7 @@ if [ ! -f upload-creds ]; then
 fi
 
 source upload-creds
+source msg-lib
 
 export GOROOT="$(pwd)/go"
 export GOPATH="$(pwd)/gopath"
@@ -193,6 +199,7 @@ gothub release \\
     --pre-release
 
 echo "Uploading build..."
+msglib_send_message "Uploading build $BUILD_NUMBER..."
 
 gothub upload \\
     --user halogenOS \\
@@ -209,7 +216,12 @@ gothub upload \\
     --tag $git_rel_tag \\
     --name "$git_rel_filename_sum" \\
     --file "$git_rel_sumpath"
-'''
+
+
+msglib_send_message "New test build $(date +%d/%m/%Y) for $Device
+
+Download: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename
+"'''
         }
 
       }
@@ -217,7 +229,7 @@ gothub upload \\
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'oneplus2'
+    Device = 'cheeseburger'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx8G'
   }
