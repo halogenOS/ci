@@ -231,6 +231,6 @@ Download: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$gi
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
     Clean = 'false'
-    _JAVA_OPTIONS = '-Xmx8G'
+    _JAVA_OPTIONS = '-Xmx6G'
   }
 }
