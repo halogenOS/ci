@@ -179,8 +179,8 @@ echo "Starting release..."
 
 full_out_path="$(realpath ../src/out/target/product/$Device)"
 
-git_rel_filename="$(ls -c $full_out_path/XOS*zip | head -n1)"
-git_rel_filename_sum="$(ls -c $full_out_path/XOS*sum | head -n1)"
+git_rel_filename="$(basename $(ls -c $full_out_path/XOS*zip | head -n1))"
+git_rel_filename_sum="$(basename $(ls -c $full_out_path/XOS*sum | head -n1))"
 git_rel_filepath="$(realpath $full_out_path/$git_rel_filename)"
 git_rel_sumpath="$(realpath $full_out_path/$git_rel_filename_sum)"
 
