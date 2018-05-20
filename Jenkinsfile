@@ -177,7 +177,7 @@ git tag $git_rel_tag && git push --tags
 
 echo "Starting release..."
 
-full_out_path="$(realpath src/out/target/product/$Device)"
+full_out_path="$(realpath ../src/out/target/product/$Device)"
 
 git_rel_filename="$(ls -c $full_out_path/XOS*zip | head -n1)"
 git_rel_filename_sum="$(ls -c $full_out_path/XOS*sum | head -n1)"
