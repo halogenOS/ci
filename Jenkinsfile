@@ -23,6 +23,7 @@ mkdir -p gopath
 
 export GOROOT="$(pwd)/go"
 export GOPATH="$(pwd)/gopath"
+export PATH="$GOROOT/bin:$PATH"
 
 echo "Downloading additional tools..."
 go get -v github.com/itchio/gothub'''
@@ -158,7 +159,7 @@ source upload-creds
 
 export GOROOT="$(pwd)/go"
 export GOPATH="$(pwd)/gopath"
-export PATH="$GOPATH/bin"
+export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
 if [ -z "$BUILD_NUMBER" ]; then
   BUILD_NUMBER=0
