@@ -217,10 +217,7 @@ gothub upload \\
     --file "$git_rel_sumpath"
 
 
-tgsendmsg "$Device" "New test build $(date +%d/%m/%Y) for $Device
-
-Download: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename
-"'''
+tgsendmsg "$Device" "New test build $(date +%d/%m/%Y) for $Device\\n\\nDownload: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename"'''
         }
 
       }
