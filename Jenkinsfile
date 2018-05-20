@@ -171,7 +171,7 @@ fi
 
 cd builds-git
 
-git_rel_tag="tb$(date +%Y%m%d.%H%M.${BUILD_NUMBER}"
+git_rel_tag="tb$(date +%Y%m%d.%H%M.${BUILD_NUMBER})"
 git tag $git_rel_tag && git push --tags
 
 echo "Starting release..."
