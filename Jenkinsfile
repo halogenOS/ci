@@ -98,12 +98,11 @@ repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos
               echo 'Syncing sources...'
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
+repo sync -c --no-tags --no-clone-bundle external/xos || :
+
 source build/envsetup.sh
 
-if ! type reporeset >/dev/null 2>/dev/null; then
-  repo sync -c --no-tags --no-clone-bundle -f external/xos
-  source build/envsetup.sh
-fi
+reporeset
 
 reposync'''
             }
@@ -231,7 +230,7 @@ tgsendmsg "$Device" "New test build $(date +%d/%m/%Y) for $Device\\n\\nDownload:
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
+    Device = 'dumpling'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx6G'
   }
