@@ -89,7 +89,7 @@ exit 0
 fi
 
 echo "Doing boostrap sync..."
-repo sync -c --no-tags build/make external/xos
+repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos
 
 '''
             }
@@ -99,6 +99,12 @@ repo sync -c --no-tags build/make external/xos
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
 source build/envsetup.sh
+
+if ! type reporeset >/dev/null 2>/dev/null; then
+  repo sync -c --no-tags --no-clone-bundle -f external/xos
+  source build/envsetup.sh
+fi
+
 reposync'''
             }
 
