@@ -123,6 +123,19 @@ if ! find device -name "$Device" -type d -mindepth 2 -maxdepth 2; then
 fi'''
             }
 
+            echo 'Doing repopicks...'
+            sh '''set +x
+
+export PATH="$(realpath $(pwd -P)/../bin):$PATH"
+
+source build/envsetup.sh
+
+while IFS="," read -ra picks; do
+  for pick in "${picks[@]}"; do
+    ( repopick $pick )
+  done
+done <<< "$Repopicks"
+'''
           }
 
         }
@@ -222,7 +235,14 @@ gothub upload \\
     --file "$git_rel_sumpath"
 
 
-tgsendmsg "$Device" "New test build $(date +%d/%m/%Y) for $Device\\n\\nDownload: https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename"'''
+tgsendmsg "$Device" \\
+"New test build ($(date +%d/%m/%Y)) for $Device
+
+*Changelog:*
+$Changelog
+
+[Download here](https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename)"
+'''
         }
 
       }
@@ -230,8 +250,10 @@ tgsendmsg "$Device" "New test build $(date +%d/%m/%Y) for $Device\\n\\nDownload:
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
+    Device = 'cheeseburger'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx6G'
+    Repopicks = '-t backlight-fixup'
+    Changelog = 'Button backlight fixes'
   }
 }
