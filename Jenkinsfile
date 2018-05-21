@@ -158,7 +158,13 @@ fi
 
 tgsendmsg "$Device" "Build $BUILD_NUMBER for $Device started"
 
-LC_ALL=C build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
+hostname() {
+  echo "halogenOS"
+}
+
+LC_ALL=C \\
+LOCALVERSION=-halogenOS \\
+  build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
           }
 
         }
@@ -250,10 +256,10 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
+    Device = 'oneplus2'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = '-t backlight-fixup'
-    Changelog = 'Button backlight fixes'
+    Repopicks = '1392 1393'
+    Changelog = 'Bt stuff, ril stuff, camera stuff, test!'
   }
 }
