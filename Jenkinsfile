@@ -256,10 +256,10 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'oneplus2'
-    Clean = 'false'
+    Device = 'cheeseburger'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = '1392 1393'
-    Changelog = 'Bt stuff, ril stuff, camera stuff, test!'
+    Repopicks = '1412,-t from-master-201805-1,1392 1393 '
+    Changelog = 'Lots of stuff from aosp master, vulkan update, kernel update, ...'
   }
 }
