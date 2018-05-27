@@ -199,7 +199,15 @@ fi
 
 cd builds-git
 
-git_rel_tag="tb$(date +%Y%m%d.%H%M.${BUILD_NUMBER})"
+# rb = release build
+# tb = test build
+# rcb = release candidate build
+if [ "$Release" == "true" ]; then
+  git_rel_type=rb
+else
+  git_rel_type=tb
+fi
+git_rel_tag="$git_rel_type$(date +%Y%m%d.%H%M.${BUILD_NUMBER})"
 git tag $git_rel_tag && git push --tags
 
 echo "Starting release..."
@@ -211,6 +219,19 @@ git_rel_filename_sum="$(basename $(ls -c $full_out_path/XOS*sum | head -n1))"
 git_rel_filepath="$(realpath $full_out_path/$git_rel_filename)"
 git_rel_sumpath="$(realpath $full_out_path/$git_rel_filename_sum)"
 
+if [ "$Release" == "true" ]; then
+gothub release \\
+    --user halogenOS \\
+    --repo builds \\
+    --tag $git_rel_tag \\
+    --name "[Release] $(date +%d/%m/%Y) for $Device" \\
+    --description "
+Changelog:
+$Changelog
+
+Checksum ($(echo $git_rel_sumpath | cut -d \'.\' -f4)): $(echo $(<$git_rel_sumpath) | cut -d \' \' -f1)"
+
+else
 gothub release \\
     --user halogenOS \\
     --repo builds \\
@@ -218,8 +239,13 @@ gothub release \\
     --name "[Test build] $(date +%d/%m/%Y) for $Device" \\
     --description "This is a TEST BUILD. Please do not use this unless you know what this means.
 
+Changelog:
+$Changelog
+
 Checksum ($(echo $git_rel_sumpath | cut -d \'.\' -f4)): $(echo $(<$git_rel_sumpath) | cut -d \' \' -f1)" \\
     --pre-release
+
+fi
 
 echo "Uploading build..."
 tgsendmsg "$Device" "Uploading build $BUILD_NUMBER..."
@@ -242,7 +268,7 @@ gothub upload \\
 
 
 tgsendmsg "$Device" \\
-"New test build ($(date +%d/%m/%Y)) for $Device
+"New $( [ \'$Release\' == \'true\' ] && echo \'release\' || echo \'test\') build ($(date +%d/%m/%Y)) for $Device
 
 *Changelog:*
 $Changelog
@@ -259,7 +285,8 @@ $Changelog
     Device = 'cheeseburger'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = '1412,-t from-master-201805-1,1392 1393 '
-    Changelog = 'Lots of stuff from aosp master, vulkan update, kernel update, ...'
+    Repopicks = ''
+    Changelog = ''
+    Release = 'true'
   }
 }
