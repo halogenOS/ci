@@ -177,6 +177,10 @@ LOCALVERSION=-halogenOS \\
           sh '''set +x
 set -e
 
+if [ -z "$Release" ]; then
+  Release=$Do_release
+fi
+
 if [ ! -f upload-creds ]; then
   echo "Upload credentials not found, skipping upload"
   exit 0
@@ -198,6 +202,8 @@ if [ ! -d builds-git ]; then
 fi
 
 cd builds-git
+
+echo "Release: $Release"
 
 # rb = release build
 # tb = test build
@@ -287,6 +293,6 @@ $Changelog
     _JAVA_OPTIONS = '-Xmx6G'
     Repopicks = ''
     Changelog = ''
-    Release = 'true'
+    Do_release = 'true'
   }
 }
