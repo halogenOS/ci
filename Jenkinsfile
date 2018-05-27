@@ -177,10 +177,6 @@ LOCALVERSION=-halogenOS \\
           sh '''set +x
 set -e
 
-if [ -z "$Release" ]; then
-  Release=$Do_release
-fi
-
 if [ ! -f upload-creds ]; then
   echo "Upload credentials not found, skipping upload"
   exit 0
@@ -213,7 +209,7 @@ if [ "$Release" == "true" ]; then
 else
   git_rel_type=tb
 fi
-git_rel_tag="$git_rel_type$(date +%Y%m%d.%H%M.${BUILD_NUMBER})"
+git_rel_tag="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-$git_rel_type"
 git tag $git_rel_tag && git push --tags
 
 echo "Starting release..."
@@ -274,7 +270,7 @@ gothub upload \\
 
 
 tgsendmsg "$Device" \\
-"New $( [ \'$Release\' == \'true\' ] && echo \'release\' || echo \'test\') build ($(date +%d/%m/%Y)) for $Device
+"New $( [ \\"$Release\\" == \'true\' ] && echo \'release\' || echo \'test\') build ($(date +%d/%m/%Y)) for $Device
 
 *Changelog:*
 $Changelog
@@ -293,6 +289,6 @@ $Changelog
     _JAVA_OPTIONS = '-Xmx6G'
     Repopicks = ''
     Changelog = ''
-    Do_release = 'true'
+    Release = 'true'
   }
 }
