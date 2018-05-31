@@ -62,7 +62,7 @@ chmod a+x bin/repo'''
           echo 'Setting path'
           sh 'export PATH="$(pwd)/bin:$PATH"'
           echo 'Initializing source tree...'
-          dir(path: 'src') {
+          dir(path: 'src/$') {
             sh '''export PATH="$(pwd)/bin:$PATH"
 if [ ! -d .repo ]; then
   repo init -u git://github.com/halogenOS/android_manifest.git -b "$XOS_REVISION"
@@ -270,7 +270,7 @@ gothub upload \\
 
 
 tgsendmsg "$Device" \\
-"New $( [ \\"$Release\\" == \'true\' ] && echo \'release\' || echo \'test\') build ($(date +%d/%m/%Y)) for $Device
+"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build ($(date +%d/%m/%Y)) for $Device
 
 *Changelog:*
 $Changelog
