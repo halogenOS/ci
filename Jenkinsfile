@@ -284,11 +284,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
-    Clean = 'true'
+    Device = 'cheeseburger'
+    Clean = 'false'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = ''
-    Changelog = ''
-    Release = 'true'
+    Repopicks = '-t from-master-201806-1'
+    Changelog = 'Stuff from AOSP master, bionic from aosp master, caf merge, ...'
+    Release = 'false'
   }
 }
