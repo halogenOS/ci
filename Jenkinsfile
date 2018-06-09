@@ -79,7 +79,7 @@ fi
         echo 'Syncing...'
         dir(path: '/mnt/building/jws/xos') {
           dir(path: 'src') {
-            retry(count: 3) {
+            retry(count: 1) {
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
 
@@ -94,11 +94,15 @@ repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos
 '''
             }
 
-            retry(count: 4) {
+            retry(count: 1) {
               echo 'Syncing sources...'
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
-repo sync -c --no-tags --no-clone-bundle external/xos || :
+
+cd external/xos
+git fetch XOS
+git reset --hard XOS/${XOS_REVISION}
+cd ../..
 
 source build/envsetup.sh
 
@@ -107,7 +111,7 @@ reporeset
 reposync'''
             }
 
-            retry(count: 2) {
+            retry(count: 1) {
               echo 'Syncing device trees...'
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
