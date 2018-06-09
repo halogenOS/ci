@@ -285,10 +285,10 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'false'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = '-t from-master-201806-1'
-    Changelog = 'Stuff from AOSP master, bionic from aosp master, caf merge, ...'
+    Repopicks = ''
+    Changelog = 'Merged r32, includes June security patches'
     Release = 'false'
   }
 }
