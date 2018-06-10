@@ -288,11 +288,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
-    Clean = 'false'
+    Device = 'cheeseburger'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = ''
-    Changelog = 'Merged r32, includes June security patches, NOW RUNS ON 5.1.2 MODEM, make sure to update'
+    Repopicks = '-t sepolicy-update-201806-1'
+    Changelog = 'Support for 5.1.2. MAKE SURE YOU UPDATE MODEM AND FW, sepolicy update, kernel update'
     Release = 'false'
   }
 }
