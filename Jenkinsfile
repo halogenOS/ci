@@ -160,6 +160,12 @@ if [ "$(python --version | cut -d \' \' -f2 | cut -d \'.\' -f1)" == "3" ]; then
   exit 1
 fi
 
+if hash ccache; then
+  export CCACHE_DIR="/mnt/ccache/jenkins/xos/${XOS_REVISION}_${Device}"
+  mkdir -p "$CCACHE_DIR"
+  ccache -M 85G
+fi
+
 tgsendmsg "$Device" "Build $BUILD_NUMBER for $Device started"
 
 hostname() {
@@ -291,8 +297,9 @@ $Changelog
     Device = 'cheeseburger'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx6G'
-    Repopicks = '-t sepolicy-update-201806-1'
-    Changelog = 'Support for 5.1.2. MAKE SURE YOU UPDATE MODEM AND FW, sepolicy update, kernel update'
+    Repopicks = ''
+    Changelog = ''
     Release = 'false'
+    USE_CCACHE = '1'
   }
 }
