@@ -65,7 +65,7 @@ chmod a+x bin/repo'''
           dir(path: 'src/$') {
             sh '''export PATH="$(pwd)/bin:$PATH"
 if [ ! -d .repo ]; then
-  repo init -u git://github.com/halogenOS/android_manifest.git -b "$XOS_REVISION"
+  repo init -u https://git.halogenos.org/halogenOS/android_manifest.git -b "$XOS_REVISION"
 fi
 '''
           }
@@ -298,7 +298,7 @@ $Changelog
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx6G'
     Repopicks = ''
-    Changelog = ''
+    Changelog = 'let\'s see'
     Release = 'false'
     USE_CCACHE = '1'
   }
