@@ -295,8 +295,8 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'true'
-    _JAVA_OPTIONS = '-Xmx6G'
+    Clean = 'false'
+    _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
     Changelog = 'let\'s see'
     Release = 'false'
