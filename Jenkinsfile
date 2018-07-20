@@ -298,7 +298,7 @@ $Changelog
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'let\'s see'
+    Changelog = 'now it shud work'
     Release = 'false'
     USE_CCACHE = '1'
   }
