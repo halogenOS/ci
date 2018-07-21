@@ -297,8 +297,8 @@ $Changelog
     Device = 'cheeseburger'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '9 10 11 12 13 14'
-    Changelog = 'Substratum updates, merge r40, some new stuff, fixes,...'
+    Repopicks = '9 10 11 12'
+    Changelog = 'Clean rebuild'
     Release = 'false'
     USE_CCACHE = '1'
   }
