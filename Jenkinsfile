@@ -295,10 +295,10 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'false'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '9 10 11 12'
-    Changelog = 'Clean rebuild'
+    Repopicks = '9 10 11 12 15 16 17 18'
+    Changelog = ''
     Release = 'false'
     USE_CCACHE = '1'
   }
