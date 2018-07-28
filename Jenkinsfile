@@ -297,8 +297,8 @@ $Changelog
     Device = 'cheeseburger'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '9 10 11 12 15 16 17 18'
-    Changelog = ''
+    Repopicks = '19'
+    Changelog = 'fwb rebase, caf merge, ...'
     Release = 'false'
     USE_CCACHE = '1'
   }
