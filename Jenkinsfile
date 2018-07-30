@@ -297,7 +297,7 @@ $Changelog
     Device = 'dumpling'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = ''
+    Repopicks = '20'
     Changelog = 'test, use latest fw'
     Release = 'false'
     USE_CCACHE = '1'
