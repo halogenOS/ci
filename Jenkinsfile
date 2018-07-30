@@ -295,7 +295,7 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'dumpling'
-    Clean = 'true'
+    Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
     Changelog = 'test, use latest fw'
