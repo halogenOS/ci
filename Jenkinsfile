@@ -294,11 +294,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
+    Device = 'cheeseburger'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = '20'
-    Changelog = 'test, use latest fw'
+    Changelog = 'yo'
     Release = 'false'
     USE_CCACHE = '1'
   }
