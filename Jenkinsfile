@@ -294,11 +294,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
-    Clean = 'false'
+    Device = 'dumpling'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '19'
-    Changelog = 'fwb rebase, caf merge, ...'
+    Repopicks = ''
+    Changelog = 'test, use latest fw'
     Release = 'false'
     USE_CCACHE = '1'
   }
