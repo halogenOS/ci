@@ -294,7 +294,7 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
+    Device = 'dumpling'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
