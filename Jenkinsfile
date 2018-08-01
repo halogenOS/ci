@@ -295,11 +295,11 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'false'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '20'
-    Changelog = 'yo'
-    Release = 'false'
+    Repopicks = ''
+    Changelog = ''
+    Release = 'true'
     USE_CCACHE = '1'
   }
 }
