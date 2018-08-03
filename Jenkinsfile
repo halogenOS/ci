@@ -294,11 +294,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'taimen'
+    Device = 'cheeseburger'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = ''
-    Changelog = ''
+    Repopicks = '22 23 24 25 26'
+    Changelog = 'made everything snappier, some partial screenshot thing, aptX freq experiment'
     Release = 'false'
     USE_CCACHE = '1'
   }
