@@ -294,12 +294,12 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
+    Device = 'taimen'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
     Changelog = ''
-    Release = 'true'
+    Release = 'false'
     USE_CCACHE = '1'
   }
 }
