@@ -294,11 +294,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
-    Clean = 'false'
+    Device = 'oneplus2'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '22 23 24 25 26 27 28 29 30'
-    Changelog = 'made everything snappier, some partial screenshot thing, aptX freq experiment, some other stuff'
+    Repopicks = ''
+    Changelog = ''
     Release = 'false'
     USE_CCACHE = '1'
   }
