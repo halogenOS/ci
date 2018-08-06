@@ -294,11 +294,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'oneplus2'
-    Clean = 'false'
+    Device = 'dumpling'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = ''
-    Changelog = ''
+    Repopicks = '34 35 37 38 39 40 41 42 43 44'
+    Changelog = 'encryption stuff, fixes, some other stuff'
     Release = 'false'
     USE_CCACHE = '1'
   }
