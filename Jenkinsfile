@@ -83,6 +83,10 @@ fi
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
 
+if [ "$Do_sync" == "false" ]; then
+  exit 0
+fi
+
 if [ -d build/make -a -d external/xos ]; then
 echo "Bootstrap sync not necessary."
 exit 0
@@ -98,6 +102,11 @@ repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos
               echo 'Syncing sources...'
               sh '''set +x
 export PATH="$(pwd)/bin:$PATH"
+
+
+if [ "$Do_sync" == "false" ]; then
+  exit 0
+fi
 
 cd external/xos
 git fetch XOS
@@ -131,6 +140,11 @@ fi'''
             sh '''set +x
 
 export PATH="$(realpath $(pwd -P)/../bin):$PATH"
+
+
+if [ "$Do_sync" == "false" ]; then
+  exit 0
+fi
 
 source build/envsetup.sh
 
@@ -301,5 +315,6 @@ $Changelog
     Changelog = 'latest android tag / security patches'
     Release = 'false'
     USE_CCACHE = '1'
+    Do_sync = 'false'
   }
 }
