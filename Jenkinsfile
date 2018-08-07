@@ -294,11 +294,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
-    Clean = 'false'
+    Device = 'cheeseburger'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = '34 35 37 38 39 40 41 42'
-    Changelog = 'encryption stuff, fixes, some other stuff'
+    Changelog = 'latest android tag / security patches'
     Release = 'false'
     USE_CCACHE = '1'
   }
