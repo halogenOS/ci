@@ -308,13 +308,13 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
+    Device = 'cheeseburger'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '34 35 37 38 39 40 41 42'
-    Changelog = 'latest android tag / security patches'
+    Repopicks = '34 35 37 38 39 40 41'
+    Changelog = 'add back the proper encryption commit for me'
     Release = 'false'
     USE_CCACHE = '1'
-    Do_sync = 'false'
+    Do_sync = 'true'
   }
 }
