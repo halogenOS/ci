@@ -309,10 +309,10 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'false'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '34 35 37 38 39 40 41'
-    Changelog = 'add back the proper encryption commit for me'
+    Repopicks = ''
+    Changelog = 'Blobs updated to 5.1.4 (use 5.1.4 fw), kernel update, other stuff'
     Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
