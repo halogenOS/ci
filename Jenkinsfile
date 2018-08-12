@@ -312,8 +312,8 @@ $Changelog
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'Blobs updated to 5.1.4 (use 5.1.4 fw), kernel update, other stuff'
-    Release = 'false'
+    Changelog = 'Use 5.1.4 firmware'
+    Release = 'true'
     USE_CCACHE = '1'
     Do_sync = 'true'
   }
