@@ -308,12 +308,12 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
-    Clean = 'false'
+    Device = 'cheeseburger'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'Use 5.1.4 firmware'
-    Release = 'true'
+    Changelog = 'Upstream merges, kernel update, perf and battery improvements, ........'
+    Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
   }
