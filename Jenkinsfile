@@ -9,7 +9,10 @@ pipeline {
 for command in git curl wget make python java type which [ [[; do
   hash $command || type $command
 done
-'''
+
+if [ ! -z "$Sleep_before_build" ];
+  sleep "$Sleep_before_build"; # sleep so that we can wait
+fi'''
         dir(path: '/mnt/building/jws/xos') {
           sh '''echo "Preparing Go..."
 
@@ -206,6 +209,8 @@ if [ ! -f upload-creds ]; then
   exit 0
 fi
 
+xos_version="${XOS_REVISION/XOS-/}"
+
 source upload-creds
 
 export GOROOT="$(pwd -P)/go"
@@ -250,7 +255,7 @@ gothub release \\
     --user halogenOS \\
     --repo builds \\
     --tag $git_rel_tag \\
-    --name "[Release] XOS ${XOS_REVISION} $(date +%d/%m/%Y) for $Device" \\
+    --name "[Release] XOS ${xos_version} $(date +%d/%m/%Y) for $Device" \\
     --description "
 Changelog:
 $Changelog
@@ -262,7 +267,7 @@ gothub release \\
     --user halogenOS \\
     --repo builds \\
     --tag $git_rel_tag \\
-    --name "[Test build] XOS ${XOS_REVISION} $(date +%d/%m/%Y) for $Device" \\
+    --name "[Test build] XOS ${xos_version} $(date +%d/%m/%Y) for $Device" \\
     --description "This is a TEST BUILD. Please do not use this unless you know what this means.
 
 Changelog:
@@ -294,7 +299,7 @@ gothub upload \\
 
 
 tgsendmsg "$Device" \\
-"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build: XOS ${XOS_REVISION} ($(date +%d/%m/%Y)) for $Device
+"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build: XOS ${xos_version} ($(date +%d/%m/%Y)) for $Device
 
 *Changelog:*
 $Changelog
@@ -308,7 +313,7 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
+    Device = 'dumpling'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
@@ -316,5 +321,6 @@ $Changelog
     Release = 'true'
     USE_CCACHE = '1'
     Do_sync = 'true'
+    Sleep_before_build = '2000'
   }
 }
