@@ -10,7 +10,7 @@ for command in git curl wget make python java type which [ [[; do
   hash $command || type $command
 done
 
-if [ ! -z "$Sleep_before_build" ];
+if [ ! -z "$Sleep_before_build" ]; then
   sleep "$Sleep_before_build"; # sleep so that we can wait
 fi'''
         dir(path: '/mnt/building/jws/xos') {
@@ -321,6 +321,6 @@ $Changelog
     Release = 'true'
     USE_CCACHE = '1'
     Do_sync = 'true'
-    Sleep_before_build = '2000'
+    Sleep_before_build = '1200'
   }
 }
