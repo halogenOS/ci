@@ -308,12 +308,12 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
+    Device = 'cheeseburger'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'Kernel update, speed up mtp, ...'
-    Release = 'false'
+    Changelog = ''
+    Release = 'true'
     USE_CCACHE = '1'
     Do_sync = 'true'
   }
