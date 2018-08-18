@@ -294,7 +294,7 @@ gothub upload \\
 
 
 tgsendmsg "$Device" \\
-"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build of XOS ${XOS_REVISION} ${($(date +%d/%m/%Y)) for $Device
+"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build: XOS ${XOS_REVISION} ($(date +%d/%m/%Y)) for $Device
 
 *Changelog:*
 $Changelog
