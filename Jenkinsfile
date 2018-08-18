@@ -250,7 +250,7 @@ gothub release \\
     --user halogenOS \\
     --repo builds \\
     --tag $git_rel_tag \\
-    --name "[Release] $(date +%d/%m/%Y) for $Device" \\
+    --name "[Release] XOS ${XOS_REVISION} $(date +%d/%m/%Y) for $Device" \\
     --description "
 Changelog:
 $Changelog
@@ -262,7 +262,7 @@ gothub release \\
     --user halogenOS \\
     --repo builds \\
     --tag $git_rel_tag \\
-    --name "[Test build] $(date +%d/%m/%Y) for $Device" \\
+    --name "[Test build] XOS ${XOS_REVISION} $(date +%d/%m/%Y) for $Device" \\
     --description "This is a TEST BUILD. Please do not use this unless you know what this means.
 
 Changelog:
@@ -294,7 +294,7 @@ gothub upload \\
 
 
 tgsendmsg "$Device" \\
-"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build ($(date +%d/%m/%Y)) for $Device
+"New $( [ "$Release" == \'true\' ] && echo \'release\' || echo \'test\') build: XOS ${XOS_REVISION} ${($(date +%d/%m/%Y)) for $Device
 
 *Changelog:*
 $Changelog
@@ -308,7 +308,7 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
+    Device = 'dumpling'
     Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
