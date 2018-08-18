@@ -312,7 +312,7 @@ $Changelog
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'Upstream merges, kernel update, perf and battery improvements, ........'
+    Changelog = 'Kernel update, speed up mtp, ...'
     Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
