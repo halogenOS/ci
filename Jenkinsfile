@@ -314,9 +314,9 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'true'
+    Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '45 46'
+    Repopicks = '45 46 47'
     Changelog = 'various improvements, op like navigation gestures'
     Release = 'false'
     USE_CCACHE = '1'
