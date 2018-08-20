@@ -313,14 +313,14 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
-    Clean = 'false'
+    Device = 'cheeseburger'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = ''
-    Changelog = ''
-    Release = 'true'
+    Repopicks = '45 46'
+    Changelog = 'various improvements, op like navigation gestures'
+    Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
-    Sleep_before_build = '1200'
+    Sleep_before_build = ''
   }
 }
