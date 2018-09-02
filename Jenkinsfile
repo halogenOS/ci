@@ -166,9 +166,10 @@ done <<< "$Repopicks"
     stage('Build') {
       steps {
         echo 'Building...'
-        dir(path: '/mnt/building/jws/xos') {
-          dir(path: 'src') {
-            sh '''set +x
+        ansiColor(colorMapName: 'xterm') {
+          dir(path: '/mnt/building/jws/xos') {
+            dir(path: 'src') {
+              sh '''set +x
 source build/envsetup.sh
 export PATH="$(realpath $(pwd -P)/..)/bin:$PATH"
 
@@ -192,6 +193,8 @@ hostname() {
 LC_ALL=C \\
 LOCALVERSION=-halogenOS \\
   build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
+            }
+
           }
 
         }
