@@ -313,11 +313,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
-    Clean = 'false'
+    Device = 'cheeseburger'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
-    Repopicks = '45 46 47'
-    Changelog = 'various improvements, op like navigation gestures'
+    Repopicks = ''
+    Changelog = 'Now this is treble - use OOS 5.1.5'
     Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
