@@ -317,7 +317,7 @@ $Changelog
   environment {
     XOS_REVISION = 'XOS-8.1'
     Device = 'cheeseburger'
-    Clean = 'true'
+    Clean = 'false'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
     Changelog = 'Now this is treble - use OOS 5.1.5'
