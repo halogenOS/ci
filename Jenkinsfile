@@ -316,11 +316,11 @@ $Changelog
   }
   environment {
     XOS_REVISION = 'XOS-8.1'
-    Device = 'cheeseburger'
-    Clean = 'false'
+    Device = 'dumpling'
+    Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'i wanna try sth'
+    Changelog = 'Pls'
     Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
