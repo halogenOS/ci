@@ -315,12 +315,12 @@ $Changelog
     }
   }
   environment {
-    XOS_REVISION = 'XOS-8.1'
-    Device = 'dumpling'
+    XOS_REVISION = 'XOS-9.0'
+    Device = 'cheeseburger'
     Clean = 'true'
     _JAVA_OPTIONS = '-Xmx7G'
     Repopicks = ''
-    Changelog = 'Pls'
+    Changelog = 'test'
     Release = 'false'
     USE_CCACHE = '1'
     Do_sync = 'true'
