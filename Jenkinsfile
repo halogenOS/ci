@@ -66,7 +66,7 @@ chmod a+x bin/repo'''
           sh 'export PATH="$(pwd)/bin:$PATH"'
           echo 'Initializing source tree...'
           dir(path: 'src') {
-            sh '''export PATH="$(pwd)/bin:$PATH"
+            sh '''export PATH="$(pwd)/../bin:$PATH"
 if [ ! -d .repo ]; then
   repo init -u https://git.halogenos.org/halogenOS/android_manifest.git -b "$XOS_REVISION"
 fi
