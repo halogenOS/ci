@@ -90,13 +90,13 @@ if [ "$Do_sync" == "false" ]; then
   exit 0
 fi
 
-if [ -d build/make -a -d external/xos ]; then
+if [ -d build/make -a -d external/xos -a -d vendor/aosp ]; then
 echo "Bootstrap sync not necessary."
 exit 0
 fi
 
 echo "Doing boostrap sync..."
-repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos
+repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos vendor/aosp
 
 '''
             }
