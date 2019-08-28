@@ -84,7 +84,7 @@ fi
           dir(path: 'src') {
             retry(count: 1) {
               sh '''set +x
-export PATH="$(pwd)/bin:$PATH"
+export PATH="$(pwd)/../bin:$PATH"
 
 if [ "$Do_sync" == "false" ]; then
   exit 0
@@ -104,7 +104,7 @@ repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos
             retry(count: 1) {
               echo 'Syncing sources...'
               sh '''set +x
-export PATH="$(pwd)/bin:$PATH"
+export PATH="$(pwd)/../bin:$PATH"
 
 
 if [ "$Do_sync" == "false" ]; then
@@ -126,7 +126,7 @@ reposync'''
             retry(count: 1) {
               echo 'Syncing device trees...'
               sh '''set +x
-export PATH="$(pwd)/bin:$PATH"
+export PATH="$(pwd)/../bin:$PATH"
 if ! type breakfast 2>&1 >/dev/null; then
   source build/envsetup.sh
 fi
