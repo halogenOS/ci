@@ -192,7 +192,7 @@ hostname() {
 
 LC_ALL=C \\
 LOCALVERSION=-halogenOS \\
-  build full XOS_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
+  build full aosp_$Device-userdebug $( [ "$Clean" == "false" ] && echo -n noclean || : )'''
             }
 
           }
