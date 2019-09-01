@@ -323,7 +323,7 @@ $Changelog
     Changelog = 'test'
     Release = 'false'
     USE_CCACHE = '1'
-    Do_sync = 'true'
+    Do_sync = 'false'
     Sleep_before_build = ''
   }
 }
