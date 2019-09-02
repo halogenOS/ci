@@ -231,11 +231,13 @@ fi
 
 cd builds-git
 
-if [ "$(git ls-remote origin >/dev/null 2>/dev/null || :)" == "false" ]; then
+set +e
+if [ "$(git ls-remote origin >/dev/null 2>/dev/null)" == "false" ]; then
   git remote add origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds
 else
   git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds
 fi
+set -e
 
 git fetch --all
 
