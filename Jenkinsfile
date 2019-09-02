@@ -231,6 +231,14 @@ fi
 
 cd builds-git
 
+if [ ! git ls-remote origin >/dev/null 2>/dev/null ]; then
+  git remote add origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds
+else
+  git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/halogenOS/builds
+fi
+
+git fetch --all
+
 echo "Release: $Release"
 
 # rb = release build
