@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Configuring..."
+
 local arg="$2"
 
 isinstalled() {
