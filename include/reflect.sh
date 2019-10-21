@@ -44,6 +44,8 @@ function run_bridge() {
   export CURRENT_REFLECTORS_PATH="$oldrflp"
 }
 
+foundreflector=false
+
 function run_internal() {
   local breakoo="$1"
   shift 1
@@ -52,7 +54,6 @@ function run_internal() {
   local reflector="$1"
   shift 1
   local reflectargs="$@"
-  local foundreflector=false
   if [ $breakoo -eq $rfl_nobreak_oo ]; then
     # set this to true because runall needs 0 or more reflectors
     foundreflector=true
@@ -88,7 +89,7 @@ function run_internal() {
       fi
     fi
   done
-  if ! $foundreflector; then
+  if [ "$CURRENT_REFLECTORS_PATH" == "$REFLECTOR_PATH" ] && ! $foundreflector; then
     echo -e "${CL_RED}${EF_BOLD}ERROR: reflector '$reflector' not found${CL_RESET}"
     exit 1
   fi
@@ -103,5 +104,6 @@ function clean_reflection() {
   reflectorName
   reflectorId
   unset reflect
+  foundreflector=false
   return 0
 }
