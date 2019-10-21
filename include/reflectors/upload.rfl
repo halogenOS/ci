@@ -1,0 +1,8 @@
+#!/bin/bash
+
+reflectorName "ROM upload"
+reflectorId   "rom_upload"
+
+function reflect() {
+  echo "yo me no upload yet"
+}

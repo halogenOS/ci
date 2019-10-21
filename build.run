@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+echo "Initializing..."
+
+# Working directory
+TOP="$(pwd)"
+
+mkdir -p bin tmp src
+
+export PATH="${TOP}/bin:$PATH"
+
+echo " - fw"
+# Basic stuff
+source $TOP/include/basic.sh
+source $TOP/script/config/product.config
+
+echo "Starting now!"
+# Main entry point (must include function main)
+source $MAIN_ENTRY_POINT
+
+# Start
+main $@
+
+

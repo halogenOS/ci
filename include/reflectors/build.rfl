@@ -1,0 +1,14 @@
+#!/bin/bash
+
+reflectorName "ROM building"
+reflectorId   "rom_build"
+
+function reflect() {
+  pushd src
+
+  source build/envsetup.sh
+  build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
+
+  popd
+}
+

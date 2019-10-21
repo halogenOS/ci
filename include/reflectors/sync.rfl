@@ -1,0 +1,40 @@
+#!/bin/bash
+
+reflectorName "ROM source sync"
+reflectorId   "src_sync"
+
+function reflect() {
+  echo -e "${EF_BOLD}Syncing...${CL_RESET}"
+  pushd src
+  
+  if [ ! -d .repo ]; then
+    repo init -u https://git.halogenos.org/halogenOS/android_manifest.git -b "$XOS_REVISION"
+  fi
+
+  if [ "$sync" == "false" ]; then
+      return 0
+  fi
+
+  if [ -d build/make -a -d external/xos -a -d vendor/aosp -a -d device -a -d manifest ]; then
+    echo "Bootstrap sync not necessary."
+  else
+    echo "Doing boostrap sync..."
+    repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos vendor/aosp
+  fi
+
+  cd external/xos
+  git fetch XOS
+  git reset --hard XOS/${XOS_REVISION}
+  cd ../..
+
+  # new scope to keep envsetup in its own env
+  (
+    source build/envsetup.sh
+
+    [ "$syncreset" != "false" ] && reporeset
+
+    reposync
+  )
+
+  popd
+}
