@@ -7,6 +7,10 @@ function reflect() {
   echo -e "${EF_BOLD}Syncing...${CL_RESET}"
   pushd src
   
+  if [ -d .repo ] && [ ! -d .repo/manifests ]; then
+    rm -rf .repo
+  fi
+
   if [ ! -d .repo ]; then
     repo init -u https://git.halogenos.org/halogenOS/android_manifest.git -b "$XOS_REVISION"
   fi
