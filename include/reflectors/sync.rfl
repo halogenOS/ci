@@ -16,7 +16,8 @@ function reflect() {
   fi
 
   if [ "$sync" == "false" ]; then
-      return 0
+    popd
+    return 0
   fi
 
   if [ -d build/make -a -d external/xos -a -d vendor/aosp -a -d device -a -d manifest ]; then
