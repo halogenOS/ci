@@ -15,7 +15,7 @@ function reflect() {
   # rcb = release candidate build
   if [ "$release_build" == "true" ]; then
     git_rel_type=rb
-  else [ "$release_candidate_build" == "true" ]; then
+  elif [ "$release_candidate_build" == "true" ]; then
     git_rel_type=rcb
   else
     git_rel_type=tb
