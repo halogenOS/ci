@@ -17,6 +17,7 @@ function reflect() {
 
     build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
   else
+    lunchauto aosp_${targetdevice}-${buildtype}
     make nothing
   fi
 
