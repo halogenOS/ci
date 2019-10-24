@@ -14,7 +14,7 @@ function reflect() {
 
   export GOROOT="$(pwd)/go"
   export GOPATH="$(pwd)/gopath"
-  export PATH="$GOROOT/bin:$PATH"
+  export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
   echo "Downloading additional tools..."
   go get -v github.com/itchio/gothub
