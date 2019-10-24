@@ -8,6 +8,9 @@ function reflect() {
     echo "Config config/upload_github doesn't exist, skipping"
     return 0
   fi
+
+  source config/upload_github
+
   BUILD_NUMBER=${RUN}
 
   # rb = release build
