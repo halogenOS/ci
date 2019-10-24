@@ -7,6 +7,12 @@ function reflect() {
   pushd src
 
   source build/envsetup.sh
+
+  if [ "$installclean" == "true" ]; then
+    lunchauto aosp_${targetdevice}-${buildtype}
+    make installclean
+  fi
+
   build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
 
   popd
