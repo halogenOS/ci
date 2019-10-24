@@ -13,7 +13,7 @@ function reflect() {
     make installclean
   fi
 
-  if [ "$skip_build" != "false" ]; then
+  if [ "$skip_build" != "true" ]; then
     build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
   fi
 
