@@ -1,5 +1,6 @@
 src
 bin
 tmp
+config
 go
 gopath
