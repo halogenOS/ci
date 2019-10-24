@@ -1,0 +1,66 @@
+#!/bin/bash
+
+reflectorName "GitHub Upload"
+refletorId "upload_github"
+
+function reflect() {
+  if [ ! -f config/upload_github ]; then
+    echo "Config config/upload_github doesn't exist, skipping"
+    return 0
+  fi
+  BUILD_NUMBER=${RUN}
+
+  # rb = release build
+  # tb = test build
+  # rcb = release candidate build
+  if [ "$release_build" == "true" ]; then
+    git_rel_type=rb
+  else [ "$release_candidate_build" == "true" ]; then
+    git_rel_type=rcb
+  else
+    git_rel_type=tb
+  fi
+  git_rel_tag="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-$git_rel_type"
+  git_rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
+  git_rel_file="${ANDROID_PRODUCT_OUT}/${git_rel_filename}"
+
+  rel_type_name=""
+  rel_desc_prefix=""
+  rel_extra_args=""
+  case $git_rel_type in
+    tb)
+      rel_type_name="test"
+      rel_desc_prefix="This is a TEST BUILD. Please do not use this unless you know what this means."$'\n'$'\n'
+      rel_extra_args="--pre-release"
+      ;;
+    rb)
+      rel_type_name="release"
+      rel_desc_prefix="This is an official release of halogenOS."$'\n'$'\n'
+      ;;
+    rcb)
+      rel_type_name="release candidate"
+      rel_desc_prefix="This is a release candidate. It might be unstable so use with care."$'\n'$'\n'
+      ;;
+  esac
+
+  set +x
+  gothub release \
+    --user halogenOS \
+    --repo builds \
+    --tag $git_rel_tag \
+    --name "[$rel_type_name build] XOS ${ROM_VERSION_ONLY} $(date +%d/%m/%Y) for $targetdevice" \
+    --description "${rel_desc_prefix}"$'\n'"Changelog:"$'\n'"${Changelog}"$'\n'$'\n'"Checksum (SHA256): $(echo $git_rel_file | sha256sum)" \
+    $rel_extra_args;
+
+  set +x
+  gothub upload \
+    --user halogenOS \
+    --repo builds \
+    --tag $git_rel_tag \
+    --name "$git_rel_filename" \
+    --file "$git_rel_file"
+
+  set +x
+
+  echo "Upload finished."
+}

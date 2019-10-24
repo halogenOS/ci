@@ -4,5 +4,12 @@ reflectorName "ROM upload"
 reflectorId   "rom_upload"
 
 function reflect() {
-  echo "yo me no upload yet"
+  if [ -f config/upload_config ]; then
+    source config/upload_config
+
+    echo "Using $UPLOAD_REFLECTOR"
+    run $UPLOAD_REFLECTOR
+  else
+    echo "No upload config, skipping"
+  fi
 }
