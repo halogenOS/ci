@@ -13,7 +13,9 @@ function reflect() {
     make installclean
   fi
 
-  build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
+  if [ "$skip_build" != "false" ]; then
+    build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
+  fi
 
   popd
 }
