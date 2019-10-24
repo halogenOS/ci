@@ -5,7 +5,7 @@ echo "Initializing..."
 # Working directory
 TOP="$(pwd)"
 
-mkdir -p bin tmp src
+mkdir -p bin tmp src config
 
 export PATH="${TOP}/bin:$PATH"
 
