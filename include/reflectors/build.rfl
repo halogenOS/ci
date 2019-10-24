@@ -8,7 +8,6 @@ function reflect() {
 
   source build/envsetup.sh
 
-
   if [ "$skip_build" != "true" ]; then
     if [ "$installclean" == "true" ]; then
       lunchauto aosp_${targetdevice}-${buildtype}
@@ -18,7 +17,6 @@ function reflect() {
     build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
   else
     lunchauto aosp_${targetdevice}-${buildtype}
-    make nothing
   fi
 
   popd
