@@ -14,9 +14,9 @@ function reflect() {
       make installclean
     fi
 
-    messaging_send_message "Build ${RUN} started for ${targetdevice} (${buildtype}) on ${hostname})"
+    messaging_send_message "Build ${RUN} started for ${targetdevice} (${buildtype}) on $(hostname)"
     build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean")
-    messaging_send_message "Build ${RUN} finished on ${hostname}"
+    messaging_send_message "Build ${RUN} finished on $(hostname)"
   else
     lunchauto aosp_${targetdevice}-${buildtype}
   fi
