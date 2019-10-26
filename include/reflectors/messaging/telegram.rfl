@@ -6,7 +6,7 @@ reflectorId     "messaging_telegram"
 export MESSAGING_SEND_FUNC="messaging_telegram_send_message"
 
 function messaging_telegram_req() {
-  curl https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/$endpoint --data "$data"
+  curl https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/$endpoint -H "Content-Type: application/json" --data "$data" 2>/dev/null >/dev/null
 }
 
 function messaging_telegram_send_message() {
@@ -16,9 +16,9 @@ function messaging_telegram_send_message() {
     return 0
   fi
   endpoint="sendMessage" data='{
-    chat_id: "'"$(<$device_file)"'",
-    text: "'"$@"'",
-    parse_mode: "Markdown"
+    "chat_id": "'"$(<$device_file)"'",
+    "text": "'"$@"'",
+    "parse_mode": "Markdown"
   }' messaging_telegram_req
 }
 
