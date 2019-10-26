@@ -8,6 +8,7 @@ function reflect() {
     source config/upload_config
 
     echo "Using $UPLOAD_REFLECTOR"
+    messaging_send_message "Uploading build ${RUN} using ${UPLOAD_REFLECTOR}"
     run $UPLOAD_REFLECTOR
   else
     echo "No upload config, skipping"

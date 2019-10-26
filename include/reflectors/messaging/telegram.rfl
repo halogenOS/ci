@@ -1,0 +1,30 @@
+#!/bin/bash
+
+reflectorName   "Telegram Messaging"
+reflectorId     "messaging_telegram"
+
+export MESSAGING_SEND_FUNC="messaging_telegram_send_message"
+
+function messaging_telegram_req() {
+  curl https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/$endpoint --data "$data"
+}
+
+function messaging_telegram_send_message() {
+  local device_file="config/messaging_telegram_device_chats/$targetdevice"
+  if [ ! -f "$device_file" ]; then
+    echo "This device is not registered yet!"
+    return 0
+  fi
+  endpoint="sendMessage" data='{
+    chat_id: "'"$(<$device_file)"'",
+    text: "'"$@"'",
+    parse_mode: "Markdown"
+  }' messaging_telegram_req
+}
+
+function reflect() {
+  source config/messaging_telegram
+  return 0
+}
+
+
