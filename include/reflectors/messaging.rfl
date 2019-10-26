@@ -4,19 +4,19 @@ reflectorName   "Messaging"
 reflectorId     "messaging_init"
 
 function messaging_send_message() {
-  if [ ! -f config/messaging ]; then
+  if [ ! -f $TOP/config/messaging ]; then
     return 0
   fi
   $MESSAGING_SEND_FUNC "$@"
 }
 
 function reflect() {
-  if [ ! -f config/messaging ]; then
+  if [ ! -f $TOP/config/messaging ]; then
     echo "No messaging config"
     return 0
   fi
 
-  source config/messaging
+  source $TOP/config/messaging
   run $MESSAGING_REFLECTOR
 }
 
