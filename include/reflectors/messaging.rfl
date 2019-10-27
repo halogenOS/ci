@@ -5,6 +5,7 @@ reflectorId     "messaging_init"
 
 function messaging_send_message() {
   if [ ! -f $TOP/config/messaging ]; then
+    echo "messaging_send_message: $TOP/config/messaging not found, not sending message"
     return 0
   fi
   $MESSAGING_SEND_FUNC "$@"
