@@ -36,7 +36,7 @@ function reflect() {
   (
     source build/envsetup.sh
 
-    #[ "$syncreset" != "false" ] && reporeset
+    [ "$syncreset" != "false" ] && reporeset
 
     reposync
   )
