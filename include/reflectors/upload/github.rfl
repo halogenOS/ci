@@ -68,5 +68,6 @@ function reflect() {
   echo "Upload finished."
 
   messaging_send_message "New ${rel_type_name} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype})"$'\n' \
+    $'\n'"Changelog:"$'\n'"${Changelog}"$'\n' \
     $'\n'"[Download here](https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename)"
 }
