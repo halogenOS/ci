@@ -14,7 +14,7 @@ function reflect() {
       make installclean
     fi
 
-    messaging_send_message "Build ${RUN} started for ${targetdevice} (${buildtype}) on $(hostname)"
+    messaging_send_message "Build ${RUN} started for ${targetdevice} (${buildtype}) on $(hostname)"$'\n'"$([ ! -z "$repopick" ] && echo "Repopick: $repopick")"
     build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean") || (
       messaging_send_message "Build ${RUN} for ${targetdevice} failed on $(hostname) with exit code $?"
       return 1
