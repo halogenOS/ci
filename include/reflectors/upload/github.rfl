@@ -52,7 +52,7 @@ function reflect() {
     --repo builds \
     --tag $git_rel_tag \
     --name "[$rel_type_name build] XOS ${ROM_VERSION_ONLY} $(date +%d/%m/%Y) for $targetdevice" \
-    --description "${rel_desc_prefix}"$'\n'"Changelog:"$'\n'"${Changelog}"$'\n'$'\n'"Checksum (SHA256): $(echo $git_rel_file | sha256sum)" \
+    --description "${rel_desc_prefix}"$'\n'"Changelog:"$'\n'"${Changelog}"$'\n'$'\n'"Checksum (SHA256): $(echo $git_rel_file | sha256sum | cut -d ' ' -f1)" \
     $rel_extra_args;
 
   set +x
