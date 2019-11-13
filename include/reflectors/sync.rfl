@@ -27,13 +27,14 @@ function reflect() {
     repo sync -c --no-tags --no-clone-bundle -f -j2 build/make external/xos vendor/aosp
   fi
 
-  cd external/xos
+  pushd external/xos
   git fetch XOS
   git reset --hard XOS/${XOS_REVISION}
-  cd ../..
+  popd
 
   # new scope to keep envsetup in its own env
   (
+    TOP="$(pwd)"
     source build/envsetup.sh
 
     [ "$syncreset" != "false" ] && reporeset
