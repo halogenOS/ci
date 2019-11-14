@@ -6,7 +6,14 @@ reflectorId   "src_sync"
 function reflect() {
   echo -e "${EF_BOLD}Syncing...${CL_RESET}"
   pushd src
-  
+
+  if [ -z "$(git config --global user.name)" ]; then
+    git config --global user.name "CI $USER"
+  fi
+  if [ -z "$(git config --global user.email)" ]; then
+    git config --global user.email "${USER}@$(hostname).localdomain"
+  fi
+
   if [ -d .repo ] && [ ! -d .repo/manifests ]; then
     rm -rf .repo
   fi
