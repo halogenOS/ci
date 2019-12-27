@@ -11,7 +11,7 @@ function messaging_telegram_req() {
 
 function messaging_telegram_send_message() {
   local device_file="$TOP/config/messaging_telegram_device_chats/$targetdevice"
-  local device_file_managed="$TOP/config/messaging_telegram_device_chats/$targetdevice"
+  local device_file_managed="$TOP/config_managed/messaging_telegram_device_chats/$targetdevice"
   if [ ! -f "$device_file" ] && [ ! -f "$device_file_managed" ]; then
     echo "This device is not registered yet!"
     return 0
