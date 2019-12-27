@@ -9,7 +9,6 @@ mkdir -p bin tmp src config
 
 export PATH="${TOP}/bin:$PATH"
 
-echo " - fw"
 # Basic stuff
 source $TOP/include/basic.sh
 source $TOP/script/config/product.config
