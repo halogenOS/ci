@@ -1,5 +1,15 @@
 #!/bin/bash -e
 
+echo "${ROM_VERSION} build"
+echo "Device: $targetdevice"
+echo "Type: $buildtype"
+echo "Clean: $clean"
+echo "Repopick: $repopick"
+echo "Changelog:"
+echo "$Changelog"
+echo
+echo
+
 echo "Initializing..."
 
 # Working directory
