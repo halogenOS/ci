@@ -44,7 +44,7 @@ function reflect() {
       TOP="$(pwd)"
       source build/envsetup.sh
 
-      reporesync full
+      reporesync full confident
     )
   fi
 
