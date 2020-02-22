@@ -46,11 +46,11 @@ function reflect() {
 
     [ "$syncreset" != "false" ] && reporeset
 
-    reposync
-
     if [ "$Purge_local_manifests" == "true" ]; then
       rm -f .repo/local_manifests/*.xml
     fi
+
+    reposync
   )
 
   popd
