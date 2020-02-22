@@ -47,7 +47,10 @@ function reflect() {
     [ "$syncreset" != "false" ] && reporeset
 
     if [ "$Purge_local_manifests" == "true" ]; then
+      echo "Purging local manifests"
       rm -f .repo/local_manifests/*.xml
+      echo "...done"
+      echo
     fi
 
     reposync
