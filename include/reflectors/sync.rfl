@@ -48,12 +48,16 @@ function reflect() {
 
     if [ "$Purge_local_manifests" == "true" ]; then
       echo "Purging local manifests"
-      rm -f .repo/local_manifests/*.xml
+      rm -f .repo/local_manifests/xos.xml
       echo "...done"
       echo
     fi
 
     reposync
+
+    if [ "$Purge_local_manifests" == "true" ]; then
+      breakfast "$Target_device"
+    fi
   )
 
   popd
