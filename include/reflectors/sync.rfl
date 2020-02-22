@@ -39,6 +39,15 @@ function reflect() {
   git reset --hard XOS/${XOS_REVISION}
   popd
 
+  if [ "$reporesync_full" == "true" ]; then
+    (
+      TOP="$(pwd)"
+      source build/envsetup.sh
+
+      reporesync full
+    )
+  fi
+
   # new scope to keep envsetup in its own env
   (
     TOP="$(pwd)"
