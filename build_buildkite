@@ -8,3 +8,12 @@ get_meta() {
 
 export targetdevice=`get_meta targetdevice`
 
+echo "Target device: $targetdevice"
+
+if [ -z "$targetdevice" ]; then
+	echo "Target device not defined!"
+	exit 1
+fi
+
+./build.run
+
