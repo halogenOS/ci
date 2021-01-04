@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -eu
 echo '--- :house_with_garden: Setting up the environment'
 
