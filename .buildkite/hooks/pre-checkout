@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -eu
-echo '--- :house_with_garden: Setting up the environment'
-
-export BUILDKITE_CLEAN_CHECKOUT="false"
-export BUILDKITE_GIT_CLEAN_FLAGS=""
