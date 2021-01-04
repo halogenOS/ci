@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -eou pipefail
+
+get_meta() {
+  buildkite-agent meta-data get $@
+}
+
+export targetdevice=`get_meta targetdevice`
+
