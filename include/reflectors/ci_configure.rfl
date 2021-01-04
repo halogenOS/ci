@@ -16,9 +16,6 @@ function reflect() {
   export GOPATH="$(pwd)/gopath"
   export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
-  echo "Downloading additional tools..."
-  go get -v github.com/itchio/gothub
-
   if ! isinstalled repo; then
     curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
     chmod a+x bin/repo
