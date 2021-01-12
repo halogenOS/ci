@@ -7,8 +7,10 @@ get_meta() {
 }
 
 export targetdevice=`get_meta targetdevice`
+export Changelog=`get_meta changelog`
 
 echo "Target device: $targetdevice"
+echo "Changelog: $Changelog"
 
 if [ -z "$targetdevice" ]; then
 	echo "Target device not defined!"
