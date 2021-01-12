@@ -62,7 +62,7 @@ function reflect() {
       echo
     fi
 
-    reposync
+    reposync slow
 
     if [ "$Purge_local_manifests" == "true" ]; then
       breakfast "$Target_device"
