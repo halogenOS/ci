@@ -64,9 +64,6 @@ function reflect() {
 
     reposync slow
 
-    if [ "$Purge_local_manifests" == "true" ]; then
-      breakfast "$Target_device"
-    fi
   )
 
   popd
