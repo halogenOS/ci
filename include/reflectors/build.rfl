@@ -14,14 +14,14 @@ function reflect() {
       make installclean
     fi
 
-    messaging_send_message "Build ${RUN} started for ${targetdevice} (${buildtype}) on $(hostname)"$'\n'"$([ ! -z "$repopick" ] && echo "Repopick: $repopick")"
+    messaging_send_message "Build [${RUN}](${BUILD_URL}) started for ${targetdevice} (${buildtype}) on $(hostname)"$'\n'"$([ ! -z "$repopick" ] && echo "Repopick: $repopick")"
     build full aosp_${targetdevice}-${buildtype} $([ "${clean}" == "false" ] && echo -n "noclean") || (
-      messaging_send_message "Build ${RUN} for ${targetdevice} failed on $(hostname)"
+      messaging_send_message "Build [${RUN}](${BUILD_URL}) for ${targetdevice} failed on $(hostname)"
       return 1
     )
-    messaging_send_message "Build ${RUN} for ${targetdevice} finished on $(hostname)"
+    messaging_send_message "Build [${RUN}](${BUILD_URL}) for ${targetdevice} finished on $(hostname)"
   else
-    lunchauto aosp_${targetdevice}-${buildtype}
+    lunch aosp_${targetdevice}-${buildtype}
   fi
 
   popd
