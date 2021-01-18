@@ -12,6 +12,12 @@ echo
 
 echo "Initializing..."
 
+if [ -z "$BUILD_NUMBER" -a -n "$RUN" ]; then
+  export BUILD_NUMBER="${RUN}"
+else
+  export RUN="${BUILD_NUMBER}"
+fi
+
 # Working directory
 TOP="$(pwd)"
 
