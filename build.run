@@ -18,6 +18,22 @@ else
   export RUN="${BUILD_NUMBER}"
 fi
 
+
+# rb = release build
+# tb = test build
+# rcb = release candidate build
+if [ "$release_build" == "true" ]; then
+  export GIT_REL_TYPE=rb
+elif [ "$release_candidate_build" == "true" ]; then
+  export GIT_REL_TYPE=rcb
+else
+  export GIT_REL_TYPE=tb
+fi
+export GIT_REL_TAG="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-${GIT_REL_TYPE}"
+
+echo "Release tag: $GIT_REL_TAG"
+echo "Release type: $GIT_REL_TYPE"
+
 # Working directory
 TOP="$(pwd)"
 
