@@ -11,18 +11,7 @@ function reflect() {
 
   source config/upload_github
 
-  BUILD_NUMBER=${RUN}
-
-  # rb = release build
-  # tb = test build
-  # rcb = release candidate build
-  if [ "$release_build" == "true" ]; then
-    git_rel_type=rb
-  elif [ "$release_candidate_build" == "true" ]; then
-    git_rel_type=rcb
-  else
-    git_rel_type=tb
-  fi
+  git_rel_type="${GIT_REL_TYPE}"
   git_rel_tag="${GIT_REL_TAG}"
   git_rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
   git_rel_file="${ANDROID_PRODUCT_OUT}/${git_rel_filename}"
