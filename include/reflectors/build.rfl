@@ -7,6 +7,8 @@ function reflect() {
   pushd src
 
   source build/envsetup.sh
+  
+  export GIT_REL_TAG="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-$git_rel_type"
 
   if [ "$skip_build" != "true" ]; then
     if [ "$installclean" == "true" ]; then
