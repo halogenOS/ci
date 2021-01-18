@@ -50,6 +50,7 @@ function reflect() {
   esac
 
   set +x
+  echo "Creating GitHub release (tag: $git_rel_tag)"
   GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gothub release \
     --user halogenOS \
     --repo builds \
@@ -59,6 +60,7 @@ function reflect() {
     $rel_extra_args;
 
   set +x
+  echo "Uploading file $git_rel_filename"
   GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gothub upload \
     --user halogenOS \
     --repo builds \
