@@ -11,9 +11,20 @@ function reflect() {
       UPLOAD_REFLECTORS=($UPLOAD_REFLECTOR)
     fi
 
+    local max_tries=3
     for upload_reflector in ${UPLOAD_REFLECTORS[*]}; do
         echo "Using $upload_reflector"
-        run $upload_reflector
+        try=0
+        while [ $try -lt $max_tries ]; do
+          if run $upload_reflector; then
+            echo "Upload successful!"
+            break
+          else
+            try=$(($try+1))
+            echo "Upload failed! Try: $try"
+            messaging_send_message "Failed to upload using $upload_reflector, retry: $try (max: $max_tries)"
+          fi
+        done
     done
 
   else
