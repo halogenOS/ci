@@ -7,9 +7,15 @@ function reflect() {
   if [ -f config/upload_config ]; then
     source config/upload_config
 
-    echo "Using $UPLOAD_REFLECTOR"
-    messaging_send_message "Uploading build ${RUN} using ${UPLOAD_REFLECTOR}"
-    run $UPLOAD_REFLECTOR
+    if [ -z "$UPLOAD_REFLECTORS" ]; then
+      UPLOAD_REFLECTORS=($UPLOAD_REFLECTOR)
+    fi
+
+    for upload_reflector in $UPLOAD_REFLECTORS[*]; do
+        echo "Using $upload_reflector"
+        run $upload_reflector
+    done
+
   else
     echo "No upload config, skipping"
   fi
