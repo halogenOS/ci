@@ -4,18 +4,7 @@ reflectorName "Buildkite Artifact Upload"
 reflectorId   "upload_buildkite"
 
 function reflect() {
-  BUILD_NUMBER=${RUN}
-
-  # rb = release build
-  # tb = test build
-  # rcb = release candidate build
-  if [ "$release_build" == "true" ]; then
-    git_rel_type=rb
-  elif [ "$release_candidate_build" == "true" ]; then
-    git_rel_type=rcb
-  else
-    git_rel_type=tb
-  fi
+  git_rel_type="${GIT_REL_TYPE}"
   git_rel_tag="${GIT_REL_TAG}"
   rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
   rel_file="${ANDROID_PRODUCT_OUT}/${rel_filename}"
@@ -23,7 +12,7 @@ function reflect() {
   messaging_send_message \
     "Uploading ${rel_type_name} (${BUILDKITE_PIPELINE_SLUG}) build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as Buildkite artifact"
   
-  echo "Uploading..."
+  echo "Uploading $rel_filename"
   buildkite-agent artifact upload "$rel_file"
   
   echo "Retrieving artifact information..."
