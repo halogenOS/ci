@@ -11,7 +11,7 @@ function reflect() {
       UPLOAD_REFLECTORS=($UPLOAD_REFLECTOR)
     fi
 
-    for upload_reflector in $UPLOAD_REFLECTORS[*]; do
+    for upload_reflector in ${UPLOAD_REFLECTORS[*]}; do
         echo "Using $upload_reflector"
         run $upload_reflector
     done
