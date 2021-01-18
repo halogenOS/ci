@@ -1,0 +1,50 @@
+#!/bin/bash
+
+reflectorName "Buildkite Artifact Upload"
+reflectorId   "upload_buildkite"
+
+function reflect() {
+  BUILD_NUMBER=${RUN}
+
+  # rb = release build
+  # tb = test build
+  # rcb = release candidate build
+  if [ "$release_build" == "true" ]; then
+    git_rel_type=rb
+  elif [ "$release_candidate_build" == "true" ]; then
+    git_rel_type=rcb
+  else
+    git_rel_type=tb
+  fi
+  git_rel_tag="${GIT_REL_TAG}"
+  rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
+  rel_file="${ANDROID_PRODUCT_OUT}/${rel_filename}"
+  
+  messaging_send_message \
+    "Uploading ${rel_type_name} (${BUILDKITE_PIPELINE_SLUG}) build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as Buildkite artifact"$'\n'
+  
+  echo "Uploading..."
+  buildkite-agent artifact upload "$rel_file"
+  
+  echo "Retrieving artifact information..."
+  export BUILDKITE_ARTIFACT_URL=`curl "https://api.buildkite.com/v2/organizations/${BUILDKITE_ORGANIZATION_SLUG}/pipelines/${BUILDKITE_PIPELINE_SLUG}/builds/${BUILDKITE_BUILD_NUMBER}/artifacts" |  jq -r '.[0].download_url'`
+  
+  echo "Download link: $BUILDKITE_ARTIFACT_URL"
+
+  rel_type_name=""
+  case $git_rel_type in
+    tb)
+      rel_type_name="test"
+      ;;
+    rb)
+      rel_type_name="release"
+      ;;
+    rcb)
+      rel_type_name="release candidate"
+      ;;
+  esac
+  
+  messaging_send_message "New ${rel_type_name} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype})"$'\n' \
+    $'\n'"Changelog:"$'\n'"${Changelog}"$'\n' \
+    $'\n'"[Download here]($BUILDKITE_ARTIFACT_URL) (Buildkite artifact)"
+}
