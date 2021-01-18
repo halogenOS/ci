@@ -21,7 +21,7 @@ function reflect() {
   rel_file="${ANDROID_PRODUCT_OUT}/${rel_filename}"
   
   messaging_send_message \
-    "Uploading ${rel_type_name} (${BUILDKITE_PIPELINE_SLUG}) build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as Buildkite artifact"$'\n'
+    "Uploading ${rel_type_name} (${BUILDKITE_PIPELINE_SLUG}) build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as Buildkite artifact"
   
   echo "Uploading..."
   buildkite-agent artifact upload "$rel_file"
