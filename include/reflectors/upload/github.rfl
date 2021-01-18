@@ -23,9 +23,12 @@ function reflect() {
   else
     git_rel_type=tb
   fi
-  git_rel_tag="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-$git_rel_type"
+  git_rel_tag="${GIT_REL_TAG}"
   git_rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
   git_rel_file="${ANDROID_PRODUCT_OUT}/${git_rel_filename}"
+
+  messaging_send_message \
+    "Uploading ${rel_type_name} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as GitHub release"
 
   rel_type_name=""
   rel_desc_prefix=""
@@ -69,5 +72,5 @@ function reflect() {
 
   messaging_send_message "New ${rel_type_name} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype})"$'\n' \
     $'\n'"Changelog:"$'\n'"${Changelog}"$'\n' \
-    $'\n'"[Download here](https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename)"
+    $'\n'"[Download here](https://github.com/halogenOS/builds/releases/download/$git_rel_tag/$git_rel_filename) (GitHub Release)"
 }
