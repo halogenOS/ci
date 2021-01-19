@@ -24,10 +24,13 @@ fi
 # rcb = release candidate build
 if [ "$release_build" == "true" ]; then
   export GIT_REL_TYPE=rb
+  export GIT_REL_NAME="release"
 elif [ "$release_candidate_build" == "true" ]; then
   export GIT_REL_TYPE=rcb
+  export GIT_REL_NAME="release candidate"
 else
   export GIT_REL_TYPE=tb
+  export GIT_REL_NAME="test"
 fi
 export GIT_REL_TAG="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-${GIT_REL_TYPE}"
 
