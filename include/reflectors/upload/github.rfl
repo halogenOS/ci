@@ -19,21 +19,18 @@ function reflect() {
   messaging_send_message \
     "Uploading ${GIT_REL_NAME} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as GitHub release"
 
-  rel_type_name=""
+  rel_type_name="${GIT_REL_NAME}"
   rel_desc_prefix=""
   rel_extra_args=""
   case $git_rel_type in
     tb)
-      rel_type_name="test"
       rel_desc_prefix="This is a TEST BUILD. Please do not use this unless you know what this means."$'\n'$'\n'
       rel_extra_args="--pre-release"
       ;;
     rb)
-      rel_type_name="release"
       rel_desc_prefix="This is an official release of halogenOS."$'\n'$'\n'
       ;;
     rcb)
-      rel_type_name="release candidate"
       rel_desc_prefix="This is a release candidate. It might be unstable so use with care."$'\n'$'\n'
       ;;
   esac
