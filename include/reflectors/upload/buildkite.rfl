@@ -4,13 +4,20 @@ reflectorName "Buildkite Artifact Upload"
 reflectorId   "upload_buildkite"
 
 function reflect() {
+  if [ ! -f config/upload_buildkite ]; then
+    echo "Config config/upload_buildkite doesn't exist, skipping"
+    return 0
+  fi
+
+  source config/upload_buildkite
+
   git_rel_type="${GIT_REL_TYPE}"
   git_rel_tag="${GIT_REL_TAG}"
   rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
   rel_file="${ANDROID_PRODUCT_OUT}/${rel_filename}"
   
   messaging_send_message \
-    "Uploading ${rel_type_name} (${BUILDKITE_PIPELINE_SLUG}) build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as Buildkite artifact"
+    "Uploading ${GIT_REL_NAME} build (${BUILDKITE_PIPELINE_SLUG}) of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as Buildkite artifact"
   
   echo "Uploading $rel_filename"
   buildkite-agent artifact upload "$rel_file"
@@ -20,18 +27,7 @@ function reflect() {
   
   echo "Download link: $BUILDKITE_ARTIFACT_URL"
 
-  rel_type_name=""
-  case $git_rel_type in
-    tb)
-      rel_type_name="test"
-      ;;
-    rb)
-      rel_type_name="release"
-      ;;
-    rcb)
-      rel_type_name="release candidate"
-      ;;
-  esac
+  rel_type_name="${GIT_REL_NAME}"
   
   messaging_send_message "New ${rel_type_name} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype})"$'\n' \
     $'\n'"Changelog:"$'\n'"${Changelog}"$'\n' \
