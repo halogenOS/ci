@@ -17,7 +17,7 @@ function reflect() {
   git_rel_file="${ANDROID_PRODUCT_OUT}/${git_rel_filename}"
 
   messaging_send_message \
-    "Uploading ${rel_type_name} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as GitHub release"
+    "Uploading ${GIT_REL_NAME} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as GitHub release"
 
   rel_type_name=""
   rel_desc_prefix=""
