@@ -21,7 +21,7 @@ function reflect() {
   
   echo "Uploading $rel_filename"
   pushd $(dirname "$rel_file")
-  buildkite-agent artifact upload "$rel_file"
+  buildkite-agent artifact upload "$(basename $rel_file)"
   popd
   
   echo "Retrieving artifact information..."
