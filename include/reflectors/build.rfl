@@ -20,6 +20,7 @@ function reflect() {
 		echo "ccache dir $CCACHE_DIR does not exist"
 		return 1
 	fi
+	echo "ccache dir: $CCACHE_DIR"
 	if ! touch "$CCACHE_DIR/.test_ccache"; then
 		echo "Cannot write to $CCACHE_DIR, make sure it has the correct permissions set."
 		return 1
@@ -27,7 +28,7 @@ function reflect() {
 	rm "$CCACHE_DIR/.test_ccache"
 
 	echo "Configuring ccache"
-	"$(CCACHE_EXEC)" -d "$CCACHE_DIR" -M 120G
+	"$CCACHE_EXEC" -d "$CCACHE_DIR" -M 120G
   fi
 
   source build/envsetup.sh
