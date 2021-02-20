@@ -10,7 +10,7 @@ function reflect() {
   if [ -n "$CCACHE_DIR" ]; then
 	export USE_CCACHE=true
 	export CCACHE_EXEC=$(which ccache)
-	if [ -z "$CCACHE_EXEC" ];
+	if [ -z "$CCACHE_EXEC" ]; then
 		echo "Could not find ccache executable!"
 		return 1
 	else
