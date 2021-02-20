@@ -45,6 +45,11 @@ function reflect() {
       return 1
     )
     messaging_send_message "Build [${RUN}](${BUILD_URL}) for ${targetdevice} finished on $(hostname)"
+	echo
+	if [ -n "$USE_CCACHE" ]; then
+		echo "ccache statistics:"
+		"$CCACHE_EXEC" -d "$CCACHE_DIR" --print-stats
+	fi
   else
     lunch aosp_${targetdevice}-${buildtype}
   fi
