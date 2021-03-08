@@ -1,0 +1,58 @@
+env:
+  sync: true
+  clean: true
+  repopick: 
+  Changelog: 
+  buildtype: "userdebug"
+  syncreset: false
+  skip_build: false
+  ROM_REVISION: "XOS-11.0"
+  XOS_REVISION: "XOS-11.0"
+  ROM_VERSION_ONLY: "11.0"
+  installclean: false
+  targetdevice: 
+  release_build: false
+  reporesync_full: false
+  CUSTOM_BUILD_TYPE: "rolling"
+  Purge_local_manifests: false
+  release_candidate_build: false
+  # buildkite-specific
+  BUILDKITE_CLEAN_CHECKOUT: false
+  BUILDKITE_REPO:
+  
+
+steps:
+  - input: "Build details"
+    key: build-details
+    fields:
+      - text: Device
+        key: targetdevice
+      - text: Changelog
+        key: changelog
+
+  - command: |-
+      set +x
+      if [ -x "./build_buildkite" ]; then
+        git config pull.ff only
+        ( git checkout autoci && git branch -u origin/autoci ) || :
+        git pull
+      else
+        if [ -d ".git" ]; then
+          echo "Help! .git exists but build_buildkite does not."
+          exit 1
+        fi
+        git clone -v https://github.com/halogenOS/ci.git .
+      fi
+    parallelism: 1
+    key: checkout
+    plugins:
+      - thedyrt/skip-checkout#v0.1.1: ~
+      
+  - command: "./build_buildkite"
+    branches: "autoci"
+    parallelism: 1
+    plugins:
+      - thedyrt/skip-checkout#v0.1.1: ~
+    depends_on:
+      - build-details
+      - checkout
