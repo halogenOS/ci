@@ -14,7 +14,7 @@ env:
   release_build: false
   reporesync_full: false
   CUSTOM_BUILD_TYPE: "rolling"
-  BUILD_PARTY: "official"
+  BUILD_PARTY: "OFFICIAL"
   Purge_local_manifests: false
   release_candidate_build: false
   # buildkite-specific
