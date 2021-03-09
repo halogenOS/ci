@@ -37,6 +37,10 @@ export GIT_REL_TAG="v$(date +%Y%m%d.%H%M.${BUILD_NUMBER})-${GIT_REL_TYPE}"
 echo "Release tag: $GIT_REL_TAG"
 echo "Release type: $GIT_REL_TYPE"
 
+if [ "$BUILD_PARTY" == "official" ]; then
+  export CUSTOM_BUILD_TYPE="${CUSTOM_BUILD_TYPE}-OFFICIAL"
+fi
+
 # Working directory
 TOP="$(pwd)"
 
