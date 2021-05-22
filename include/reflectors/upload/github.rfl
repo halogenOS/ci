@@ -25,7 +25,7 @@ function reflect() {
   case $git_rel_type in
     tb)
       rel_desc_prefix="This is a TEST BUILD. Please do not use this unless you know what this means."$'\n'$'\n'
-      rel_extra_args="--pre-release"
+      rel_extra_args="--prerelease"
       ;;
     rb)
       rel_desc_prefix="This is an official release of halogenOS."$'\n'$'\n'
@@ -37,23 +37,12 @@ function reflect() {
 
   set +x
   echo "Creating GitHub release (tag: $git_rel_tag)"
-  GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gothub release \
-    --user halogenOS \
-    --repo builds \
-    --tag $git_rel_tag \
-    --name "[$rel_type_name build] XOS ${ROM_VERSION_ONLY} $(date +%d/%m/%Y) for $targetdevice" \
-    --description "${rel_desc_prefix}"$'\n'"Changelog:"$'\n'"${Changelog}"$'\n'$'\n'"Checksum (SHA256): $(echo $git_rel_file | sha256sum | cut -d ' ' -f1)" \
-    $rel_extra_args;
-
-  set +x
-  echo "Uploading file $git_rel_filename"
-  GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gothub upload \
-    --user halogenOS \
-    --repo builds \
-    --tag $git_rel_tag \
-    --name "$git_rel_filename" \
-    --file "$git_rel_file"
-
+  GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gh release create \
+    -R halogenOS/builds \
+    --title "[$rel_type_name build] XOS ${ROM_VERSION_ONLY} $(date +%d/%m/%Y) for $targetdevice" \
+    --notes "${rel_desc_prefix}"$'\n'"Changelog:"$'\n'"${Changelog}"$'\n'$'\n'"Checksum (SHA256): $(echo $git_rel_file | sha256sum | cut -d ' ' -f1)" \
+    $rel_extra_args $git_rel_tag "$git_rel_file";
+    
   set +x
 
   echo "Upload finished."
