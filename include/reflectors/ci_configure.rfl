@@ -4,18 +4,6 @@ reflectorName "Configure script"
 reflectorId   "ci_configure"
 
 function reflect() {
-  #if [ ! -d go ]; then
-  #    echo "Downloading Go..."
-  #      curl https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz 2>/dev/null | tar -xvz
-  #fi
-
-  #echo "Creating directories for Go..."
-  #mkdir -p gopath
-
-  #export GOROOT="$(pwd)/go"
-  #export GOPATH="$(pwd)/gopath"
-  #export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
-
   if ! isinstalled repo; then
     curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
     chmod a+x bin/repo
