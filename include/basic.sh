@@ -3,7 +3,7 @@
 export INCLUDE_BASIC_SH="1"
 
 function include() {
-  for i in ${@[*]}; do
+  for i in $@; do
     source $TOP/include/$i.sh
   done
 }
@@ -67,7 +67,7 @@ function logd() {
 }
 
 function logt() {
-  logd "[$REFLECTOR_NAME] ${@[*]}"
+  logd "[$REFLECTOR_NAME] $@"
 }
 
 logd "Welcome."
