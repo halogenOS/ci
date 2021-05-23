@@ -36,13 +36,15 @@ function reflect() {
   esac
 
   set +x
-  echo "Creating GitHub release (tag: $git_rel_tag)"
+  echo "Releasing to GitHub (tag: $git_rel_tag)"
   GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gh release create \
     -R halogenOS/builds \
     --title "[$rel_type_name build] XOS ${ROM_VERSION_ONLY} $(date +%d/%m/%Y) for $targetdevice" \
     --notes "${rel_desc_prefix}"$'\n'"Changelog:"$'\n'"${Changelog}"$'\n'$'\n'"Checksum (SHA256): $(echo $git_rel_file | sha256sum | cut -d ' ' -f1)" \
-    $rel_extra_args $git_rel_tag "$git_rel_file";
-    
+    $rel_extra_args \
+    $git_rel_tag \
+	"$git_rel_file#$(basename $git_rel_file)"
+
   set +x
 
   echo "Upload finished."
