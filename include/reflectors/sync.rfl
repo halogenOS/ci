@@ -27,7 +27,7 @@ function reflect() {
     return 0
   fi
 
-  if [ -d build/make -a -d external/xos -a -d vendor/aosp -a -d device -a -d manifest ]; then
+  if [ -d build/make -a -d external/xos -a -d vendor/halogenOS -a -d device -a -d manifest ]; then
     echo "Bootstrap sync not necessary."
   else
     echo "Doing boostrap sync..."
