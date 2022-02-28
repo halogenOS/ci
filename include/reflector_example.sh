@@ -2,7 +2,7 @@
 
 # THIS IS NOT PART OF THE REFLECTION EXAMPLE
 cd ../
-TOP="$(pwd)"
+ROM_BUILD_CI_TOP="$(pwd)"
 source include/basic.sh
 
 # START OF REFLECTION EXAMPLE

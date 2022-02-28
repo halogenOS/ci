@@ -1,6 +1,6 @@
 #!/bin/bash
 
-        REFLECTORS_PATH="$TOP/include/reflectors"
+        REFLECTORS_PATH="$ROM_BUILD_CI_TOP/include/reflectors"
 CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
 
 export REFLECTOR_NAME=""
@@ -63,7 +63,7 @@ function run_internal() {
     if [[ "$reflfn" == *".pointer" ]]; then
       local point="$(cat $sc)"
       logv "Found pointer to '$point', from '$reflfn'"
-      CURRENT_REFLECTORS_PATH="$TOP/$point"
+      CURRENT_REFLECTORS_PATH="$ROM_BUILD_CI_TOP/$point"
       run_internal $breakoo $allargs
       CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
       continue

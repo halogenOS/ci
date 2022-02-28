@@ -4,7 +4,7 @@ export INCLUDE_BASIC_SH="1"
 
 function include() {
   for i in $@; do
-    source $TOP/include/$i.sh
+    source $ROM_BUILD_CI_TOP/include/$i.sh
   done
 }
 

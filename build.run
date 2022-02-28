@@ -42,15 +42,15 @@ if [ -n "$BUILD_PARTY" ]; then
 fi
 
 # Working directory
-TOP="$(pwd)"
+ROM_BUILD_CI_TOP="$(pwd)"
 
 mkdir -p bin tmp src config
 
-export PATH="${TOP}/bin:$PATH"
+export PATH="${ROM_BUILD_CI_TOP}/bin:$PATH"
 
 # Basic stuff
-source $TOP/include/basic.sh
-source $TOP/script/config/product.config
+source $ROM_BUILD_CI_TOP/include/basic.sh
+source $ROM_BUILD_CI_TOP/script/config/product.config
 
 echo "Starting now!"
 # Main entry point (must include function main)

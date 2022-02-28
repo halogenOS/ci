@@ -3,9 +3,9 @@
 export PRODUCT_NAME=""
 export PRODUCT_VERSION=""
 export PRODUCT_CMD_DEPS="bash cat pwd source"
-       MAIN_ENTRY_POINT_CFG="$TOP/script/entrypoint"
+       MAIN_ENTRY_POINT_CFG="$ROM_BUILD_CI_TOP/script/entrypoint"
 if [ -f "$MAIN_ENTRY_POINT_CFG" ]; then
-  export MAIN_ENTRY_POINT="$(cat $TOP/script/entrypoint)"
+  export MAIN_ENTRY_POINT="$(cat $ROM_BUILD_CI_TOP/script/entrypoint)"
 else
   export MAIN_ENTRY_POINT="script/main.sh"
 fi

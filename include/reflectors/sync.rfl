@@ -41,7 +41,7 @@ function reflect() {
 
   if [ "$reporesync_full" == "true" ]; then
     (
-      TOP="$(pwd)"
+      ROM_BUILD_CI_TOP="$(pwd)"
       source build/envsetup.sh
 
       reporesync full confident
@@ -50,7 +50,7 @@ function reflect() {
 
   # new scope to keep envsetup in its own env
   (
-    TOP="$(pwd)"
+    ROM_BUILD_CI_TOP="$(pwd)"
     source build/envsetup.sh
 
     [ "$syncreset" != "false" ] && reporeset
