@@ -4,6 +4,7 @@ reflectorName "GitHub Upload"
 reflectorId   "upload_github"
 
 function reflect() {
+  echo "GitHub upload"
   if [ ! -f config/upload_github ]; then
     echo "Config config/upload_github doesn't exist, skipping"
     return 0
