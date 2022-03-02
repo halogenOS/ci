@@ -14,7 +14,7 @@ function reflect() {
 
   git_rel_type="${GIT_REL_TYPE}"
   git_rel_tag="${GIT_REL_TAG}"
-  git_rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
+  git_rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version=' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
   git_rel_file="${ANDROID_PRODUCT_OUT}/${git_rel_filename}"
 
   messaging_send_message \
