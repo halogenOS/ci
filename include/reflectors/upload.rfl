@@ -4,6 +4,7 @@ reflectorName "ROM upload"
 reflectorId   "rom_upload"
 
 function reflect() {
+  echo "ROM upload start."
   if [ -f config/upload_config ]; then
     source config/upload_config
 
