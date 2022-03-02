@@ -4,6 +4,7 @@ reflectorName "Buildkite Artifact Upload"
 reflectorId   "upload_buildkite"
 
 function reflect() {
+  echo "Buildkite upload"
   if [ ! -f config/upload_buildkite ]; then
     echo "Config config/upload_buildkite doesn't exist, skipping"
     return 0
