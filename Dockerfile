@@ -24,4 +24,4 @@ workdir /
 run pacman --noconfirm -U /tmp/pkgbuild/buildkite-agent-bin/*.pkg.tar.*
 run rm -rf /tmp/pkgbuild
 
-entrypoint ["/usr/bin/buildkite-agent"]
+entrypoint ["/usr/bin/buildkite-agent", "start"]
