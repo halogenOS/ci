@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  buildkite:
+    build: .
+    volumes:
+      - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg
+      - .:/bk
