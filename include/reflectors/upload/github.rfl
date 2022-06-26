@@ -16,6 +16,7 @@ function reflect() {
   git_rel_tag="${GIT_REL_TAG}"
   git_rel_filename="$(cat ${ANDROID_PRODUCT_OUT}/system/build.prop | grep -E '^ro.custom.version=' | sed -re 's/^ro.custom.version=(.*)$/\1.zip/')"
   git_rel_file="${ANDROID_PRODUCT_OUT}/${git_rel_filename}"
+  git_rel_boot_file="${ANDROID_PRODUCT_OUT}/boot.img"
 
   messaging_send_message \
     "Uploading ${GIT_REL_NAME} build of XOS ${ROM_VERSION_ONLY} ($git_rel_tag) for ${targetdevice} (${buildtype}) as GitHub release"
@@ -45,6 +46,12 @@ function reflect() {
     $rel_extra_args \
     $git_rel_tag \
 	"$git_rel_file#$(basename $git_rel_file)"
+
+  if [ -f "$git_rel_boot_file" ]; then
+    echo "boot.img found, uploading it"
+    GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gh release upload \
+    	$git_rel_tag "$git_rel_boot_file#boot.img"
+  fi
 
   set +x
 
