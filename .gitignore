@@ -4,3 +4,4 @@ tmp
 config
 go
 gopath
+/buildkite-agent.cfg
