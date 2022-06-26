@@ -19,7 +19,7 @@ function reflect() {
   fi
 
   if [ ! -d .repo ]; then
-    repo init -u https://git.halogenos.org/halogenOS/android_manifest.git -b "$XOS_REVISION"
+    yes | repo init -u https://git.halogenos.org/halogenOS/android_manifest.git -b "$XOS_REVISION"
   fi
 
   if [ "$sync" == "false" ]; then
