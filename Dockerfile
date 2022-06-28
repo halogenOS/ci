@@ -9,6 +9,10 @@ run pacman -Syu --needed --noconfirm \
       openssh gperf squashfs-tools schedtool \
       perl-switch ttf-dejavu imagemagick
 
+# XOS-specific
+run pacman -Syu --needed --noconfirm \
+      github-cli jq
+
 run curl -L https://github.com/halogenOS/arch_ncurses5-compat-libs/releases/download/v6.3-abi5-1/ncurses5-compat-libs-6.3-1-x86_64.pkg.tar.zst > ncurses5-compat-libs.pkg.tar.zst
 run pacman --noconfirm -U ncurses5-compat-libs.pkg.tar.zst
 
