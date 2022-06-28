@@ -50,6 +50,7 @@ function reflect() {
   if [ -f "$git_rel_boot_file" ]; then
     echo "boot.img found, uploading it"
     GITHUB_USER="$GITHUB_USER" GITHUB_TOKEN="$GITHUB_TOKEN" gh release upload \
+        -R halogenOS/builds \
     	$git_rel_tag "$git_rel_boot_file#boot.img"
   fi
 
