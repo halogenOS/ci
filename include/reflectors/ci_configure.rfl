@@ -9,6 +9,7 @@ function reflect() {
     alias hostname="echo $BUILDKITE_AGENT_NAME"
     export HOSTNAME="$BUILDKITE_AGENT_NAME"
     echo -e "#!/bin/bash\necho '$BUILDKITE_AGENT_NAME'" > bin/hostname
+    chmod +x bin/hostname
   fi
   if ! isinstalled repo; then
     curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
