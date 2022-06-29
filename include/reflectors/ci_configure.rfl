@@ -4,13 +4,17 @@ reflectorName "Configure script"
 reflectorId   "ci_configure"
 
 function reflect() {
+  mkdir -p bin
   if [ -n "$BUILDKITE_AGENT_NAME" ]; then
-    hostname "$BUILDKITE_AGENT_NAME"
+    alias hostname="echo $BUILDKITE_AGENT_NAME"
+    export HOSTNAME="$BUILDKITE_AGENT_NAME"
+    echo -e "#!/bin/bash\necho '$BUILDKITE_AGENT_NAME'" > bin/hostname
   fi
   if ! isinstalled repo; then
     curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
     chmod a+x bin/repo
   fi
+  export PATH="$(pwd)/bin:$PATH"
 
   echo 'Checking Python'
   if [ "$(python --version | cut -d ' ' -f2 | cut -d '.' -f1)" == "3" ]; then
