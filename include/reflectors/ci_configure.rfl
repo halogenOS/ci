@@ -4,6 +4,9 @@ reflectorName "Configure script"
 reflectorId   "ci_configure"
 
 function reflect() {
+  if [ -n "$BUILDKITE_AGENT_NAME" ]; then
+    hostname "$BUILDKITE_AGENT_NAME"
+  fi
   if ! isinstalled repo; then
     curl https://storage.googleapis.com/git-repo-downloads/repo > bin/repo
     chmod a+x bin/repo
