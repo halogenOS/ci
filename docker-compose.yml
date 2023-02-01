@@ -5,7 +5,8 @@ services:
     build: .
     restart: unless-stopped
     volumes:
-      - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg
+      - /etc/hostname:/etc/machine-id:ro
+      - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg:ro
       - ${BUILDKITE_DIR}:/bk
       - ${BUILDKITE_CCACHE_DIR}:/ccache
 
