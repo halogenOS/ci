@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-set -x
-
 export GIT_TERMINAL_PROMPT=0
+
+export BUILDKITE_REFSPEC="${BUILDKITE_REFSPEC:=main}"
 
 git config --global --add safe.directory $(pwd)
 
