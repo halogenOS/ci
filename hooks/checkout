@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+set -x
+
+export GIT_TERMINAL_PROMPT=0
+
+git config --global --add safe.directory $(pwd)
+
+if [[ -d ".git" ]]; then
+	git remote set-url origin "$BUILDKITE_REPO"
+else
+	git clone -v "$BUILDKITE_REPO" .
+fi
+
+
+git config pull.ff only
+git fetch -v origin
+( git checkout ${BUILDKITE_REFSPEC} || git checkout ${BUILDKITE_COMMIT} ) || :
+git pull
+
+
