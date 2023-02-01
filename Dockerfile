@@ -23,7 +23,7 @@ run pacman -Syu --needed --noconfirm \
 
 # XOS-specific
 run pacman -S --needed --noconfirm \
-      github-cli jq
+      github-cli jdk17-openjdk ninja
 
 run yes | pacman -Scc --noconfirm
 
