@@ -35,7 +35,7 @@ run pacman --noconfirm -U /tmp/*.pkg.tar.*
 run rm -rf /tmp/*.pkg.tar.*
 
 run groupadd -g 2000 buildkite
-run useradd -M -s /bin/bash -u 2000 -g 2000 buildkite
+run useradd -m -s /bin/bash -u 2000 -g 2000 buildkite
 user buildkite
 
 entrypoint ["/usr/bin/buildkite-agent", "start"]
