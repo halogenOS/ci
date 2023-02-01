@@ -3,6 +3,7 @@ version: "3.7"
 services:
   buildkite:
     build: .
+    restart: unless-stopped
     volumes:
       - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg
       - ${BUILDKITE_DIR}:/bk
