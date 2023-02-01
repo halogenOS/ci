@@ -5,4 +5,6 @@ services:
     build: .
     volumes:
       - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg
-      - .:/bk
+      - ${BUILDKITE_DIR}:/bk
+      - ${BUILDKITE_CCACHE_DIR}:/ccache
+
