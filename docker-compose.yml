@@ -7,6 +7,7 @@ services:
     volumes:
       - /etc/hostname:/etc/machine-id:ro
       - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg:ro
+      - ./credentials:/etc/buildkite-agent/credentials:ro
       - ${BUILDKITE_DIR}:/bk
       - ${BUILDKITE_CCACHE_DIR}:/ccache
 

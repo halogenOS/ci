@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ "$BUILDKITE_ORGANIZATION_SLUG" == "halogenos" ]]; then
+   # Extract credentials from file
+   source /etc/buildkite-agent/credentials
+fi
+
