@@ -1,9 +1,1 @@
-src
-bin
-tmp
-config
-go
-gopath
 /buildkite-agent.cfg
-/neutron
-/docker-compose.yml

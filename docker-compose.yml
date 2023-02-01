@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  buildkite:
+    build: .
+    volumes:
+      - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg
+      - ${BUILDKITE_DIR}:/bk
+      - ${BUILDKITE_CCACHE_DIR}:/ccache
+
