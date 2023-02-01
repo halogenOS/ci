@@ -5,5 +5,11 @@ set -euo pipefail
 if [[ "$BUILDKITE_ORGANIZATION_SLUG" == "halogenos" ]]; then
    # Extract credentials from file
    source /etc/buildkite-agent/credentials
+
+   export USE_CCACHE=1
+   export CCACHE_DIR=/ccache
+   export CCACHE_EXEC=/usr/bin/ccache
+
+   ccache -M 80G
 fi
 
