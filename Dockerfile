@@ -32,6 +32,8 @@ workdir /
 copy --from=bk-builder /tmp/pkgbuild/buildkite-agent-bin/*.pkg.tar.* /tmp/
 
 run pacman --noconfirm -U /tmp/*.pkg.tar.*
+run curl -L https://github.com/halogenOS/arch_ncurses5-compat-libs/releases/download/v6.3-abi5-1/ncurses5-compat-libs-6.3-1-x86_64.pkg.tar.zst > /tmp/ncurses5-compat-libs.pkg.tar.zst
+run pacman --noconfirm -U /tmp/ncurses5-compat-libs.pkg.tar.zst
 run rm -rf /tmp/*.pkg.tar.*
 
 run groupadd -g 2000 buildkite
