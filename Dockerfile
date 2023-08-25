@@ -1,6 +1,6 @@
 from archlinux as bk-builder
 
-run pacman -Sy --needed --noconfirm git fakeroot base-devel
+run pacman -Syu --needed --noconfirm git fakeroot base-devel
 
 run useradd -M -s /bin/bash builder
 run mkdir /tmp/pkgbuild && chown builder /tmp/pkgbuild
