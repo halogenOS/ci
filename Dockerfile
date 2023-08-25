@@ -19,7 +19,7 @@ run pacman -Syu --needed --noconfirm \
       zip zlib ffmpeg lzop ninja pngcrush openssl \
       gradle maven libxcrypt-compat xmlstarlet \
       openssh gperf schedtool perl-switch ttf-dejavu \
-      imagemagick jq
+      imagemagick jq pigz
 
 # XOS-specific
 run pacman -S --needed --noconfirm \
