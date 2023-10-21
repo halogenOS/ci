@@ -7,7 +7,7 @@ run mkdir /tmp/pkgbuild && chown builder /tmp/pkgbuild
 user builder
 workdir /tmp/pkgbuild
 
-run git clone https://aur.archlinux.org/buildkite-agent-bin.git
+run git clone https://github.com/halogenOS/PKGBUILD-buildkite-agent-bin.git buildkite-agent-bin
 run cd buildkite-agent-bin && makepkg --noconfirm
 
 from archlinux
@@ -18,8 +18,7 @@ run pacman -Syu --needed --noconfirm \
       repo rsync squashfs-tools unzip \
       zip zlib ffmpeg lzop ninja pngcrush openssl \
       gradle maven libxcrypt-compat xmlstarlet \
-      openssh gperf schedtool perl-switch ttf-dejavu \
-      imagemagick jq pigz
+      openssh imagemagick jq pigz
 
 # XOS-specific
 run pacman -S --needed --noconfirm \
