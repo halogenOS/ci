@@ -18,7 +18,7 @@ run pacman -Syu --needed --noconfirm \
       repo rsync squashfs-tools unzip \
       zip zlib ffmpeg lzop ninja pngcrush openssl \
       gradle maven libxcrypt-compat xmlstarlet \
-      openssh imagemagick jq pigz
+      openssh imagemagick jq pigz git-lfs
 
 # XOS-specific
 run pacman -S --needed --noconfirm \
