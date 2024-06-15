@@ -4,6 +4,8 @@ services:
   buildkite:
     build: .
     restart: unless-stopped
+    environment:
+      KEYS_FILE: ${KEYS_FILE:-}
     volumes:
       - /etc/hostname:/etc/machine-id:ro
       - ./buildkite-agent.cfg:/etc/buildkite-agent/buildkite-agent.cfg:ro
@@ -11,4 +13,5 @@ services:
       - ./hooks:/etc/buildkite-agent/hooks:ro
       - ${BUILDKITE_DIR}:/bk
       - ${BUILDKITE_CCACHE_DIR}:/ccache
+      - ${BUILDKITE_KEYS_DIR:-./keys}:/keys
 

@@ -1,3 +1,4 @@
 /buildkite-agent.cfg
 /credentials
-
+/keys
+/.env
