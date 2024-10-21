@@ -1,8 +1,6 @@
 FROM nixos/nix
 
 RUN nix-channel --update
+RUN nix-env --file '<nixpkgs>' --install --attr buildkite-agent buildkite-cli gh bash git-repo git jdk21
 
-ADD build.nix /tmp/build.nix
-RUN nix-build -o /buildkite-agent /tmp/build.nix
-
-ENTRYPOINT ["/buildkite-agent", "start"]
+ENTRYPOINT ["buildkite-agent", "start"]
