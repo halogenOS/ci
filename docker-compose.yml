@@ -2,6 +2,10 @@ services:
   buildkite:
     build: .
     restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
     environment:
       KEYS_FILE: ${KEYS_FILE:-}
     volumes:
