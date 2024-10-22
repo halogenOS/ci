@@ -14,4 +14,4 @@ RUN groupadd -g 2000 buildkite
 RUN useradd -m -s /bin/bash -u 2000 -g 2000 buildkite
 RUN usermod -a -G nix-users buildkite
 
-ENTRYPOINT ["bash", "-ec", "nix-daemon & runuser -u buildkite -g buildkite -- env PATH=/nix/var/nix/profiles/default/bin:/usr/bin:/bin buildkite-agent start & wait -n; exit $?"]
+ENTRYPOINT ["bash", "-ec", "nix-daemon & runuser -u buildkite -g buildkite -G nix-users -- env PATH=/nix/var/nix/profiles/default/bin:/usr/bin:/bin buildkite-agent start & wait -n; exit $?"]
