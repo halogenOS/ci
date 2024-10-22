@@ -11,4 +11,4 @@ RUN groupadd -g 2000 buildkite
 RUN useradd -m -s $(nix --extra-experimental-features nix-command eval -f '<nixpkgs>' --raw bash)/bin/bash -u 2000 -g 2000 buildkite
 USER buildkite
 
-ENTRYPOINT ["buildkite-agent", "start"]
+ENTRYPOINT ["bash", "-ec", "nix-daemon & buildkite-agent start & wait -n; exit $?"]
