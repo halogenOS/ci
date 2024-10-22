@@ -2,6 +2,7 @@ services:
   buildkite:
     build: .
     restart: unless-stopped
+    user: 2000:2000
     environment:
       KEYS_FILE: ${KEYS_FILE:-}
     volumes:
