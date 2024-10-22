@@ -1,14 +1,17 @@
-FROM nixos/nix
+FROM archlinux
 
+RUN pacman -Syu --needed --noconfirm nix
+
+RUN nix-channel --add https://nixos.org/channels/nixos-24.05 nixpkgs
 RUN nix-channel --update
+RUN echo "max-jobs = auto" >> /etc/nix/nix.conf
+
 RUN nix-env --file '<nixpkgs>' --install --attr buildkite-agent buildkite-cli gh bash git-repo git jdk21
 RUN nix-env --file '<nixpkgs>' --install --attr ccache ninja
+RUN nix-env --file '<nixpkgs>' --install --attr util-linux coreutils findutils
 
-RUN nix-env --file '<nixpkgs>' --install --attr shadow
-RUN cp -aL /etc/group /tmp/_group && cp -aL /etc/passwd /tmp/_passwd && cp -aL /etc/shadow /tmp/_shadow
-RUN mv /tmp/_group /etc/group && mv /tmp/_passwd /etc/passwd && mv /tmp/_shadow /etc/shadow
 RUN groupadd -g 2000 buildkite
-RUN useradd -m -s $(nix --extra-experimental-features nix-command eval -f '<nixpkgs>' --raw bash)/bin/bash -u 2000 -g 2000 buildkite
-USER buildkite
+RUN useradd -m -s /bin/bash -u 2000 -g 2000 buildkite
+RUN usermod -a -G nix-users buildkite
 
-ENTRYPOINT ["bash", "-ec", "nix-daemon & buildkite-agent start & wait -n; exit $?"]
+ENTRYPOINT ["bash", "-ec", "nix-daemon & runuser -u buildkite -g buildkite -- env PATH=/nix/var/nix/profiles/default/bin buildkite-agent start & wait -n; exit $?"]
