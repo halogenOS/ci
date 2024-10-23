@@ -8,7 +8,7 @@ RUN echo "max-jobs = auto" >> /etc/nix/nix.conf
 
 RUN nix-env --file '<nixpkgs>' --install --attr buildkite-agent buildkite-cli gh bash git-repo git jdk21
 RUN nix-env --file '<nixpkgs>' --install --attr ccache ninja
-RUN nix-env --file '<nixpkgs>' --install --attr util-linux coreutils findutils
+RUN nix-env --file '<nixpkgs>' --install --attr util-linux coreutils findutils procps
 
 RUN groupadd -g 2000 buildkite
 RUN useradd -m -s /bin/bash -u 2000 -g 2000 buildkite
