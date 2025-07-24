@@ -2,7 +2,7 @@ FROM archlinux
 
 RUN pacman -Syu --needed --noconfirm nix
 
-RUN nix-channel --add https://nixos.org/channels/nixos-24.11 nixpkgs
+RUN nix-channel --add https://nixos.org/channels/nixos-25.05 nixpkgs
 RUN nix-channel --update
 RUN echo "max-jobs = auto" >> /etc/nix/nix.conf
 RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
