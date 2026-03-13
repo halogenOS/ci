@@ -8,6 +8,8 @@
       forEachSystem = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
     in
     {
+      nixosModules.buildkite = import ./module.nix;
+
       packages = forEachSystem (system:
         let
           pkgs = import nixpkgs { inherit system; };
