@@ -33,6 +33,10 @@ let
         source ${cfg.credentialsFile}
       ''}
 
+      ${lib.optionalString (cfg.signingKeysDir != null) ''
+        export KEYS_DIR=${cfg.signingKeysDir}
+      ''}
+
       ${lib.optionalString cfg.ccache.enable ''
         export USE_CCACHE=1
         export CCACHE_DIR=${toString cfg.ccache.dir}
@@ -95,6 +99,12 @@ in {
       description = "Path to a shell file with credential exports, sourced in the environment hook.";
     };
 
+    signingKeysDir = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = "/var/credentials/xos-signing-keys";
+      description = "Path to directory containing XOS AOSP signing keys.";
+    };
+
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       default = [];
@@ -121,7 +131,6 @@ in {
   config = {
     nix.settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "buildkite-agent" ];
     };
 
     services.buildkite-agents.xos = {
@@ -153,8 +162,10 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.buildDir} 0755 buildkite-agent buildkite-agent -"
+      "d ${cfg.buildDir} 0755 buildkite-agent-xos buildkite-agent-xos -"
     ] ++ lib.optional cfg.ccache.enable
-      "d ${cfg.ccache.dir} 0755 buildkite-agent buildkite-agent -";
+      "d ${cfg.ccache.dir} 0755 buildkite-agent-xos buildkite-agent-xos -"
+    ++ lib.optional (cfg.signingKeysDir != null)
+      "d ${cfg.signingKeysDir} 0755 buildkite-agent-xos buildkite-agent-xos -";
   };
 }
