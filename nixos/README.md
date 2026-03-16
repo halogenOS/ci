@@ -22,8 +22,23 @@ Shell file sourced during the Buildkite environment hook.
 Export any secrets your pipelines need:
 
 ```sh
+# GitHub
 export GITHUB_TOKEN="ghp_..."
-export UPLOAD_API_KEY="..."
+export GITHUB_USER="..."
+export GITHUB_BUILDS_OWNER="halogenOS"
+export GITHUB_BUILDS_REPO="builds"
+
+# Discord notifications
+export DISCORD_BOT_URL="https://..."
+export DISCORD_BOT_TOKEN="..."
+
+# Telegram notifications
+export TG_API_KEY="..."
+export TG_CHAT_ID_DEVICE_DEVICENAME="..."
+
+# ROM metadata
+export ROM_NAME="halogenOS"
+export CHANGELOG="..."
 ```
 
 Variables matching the following patterns are automatically redacted from logs:
@@ -55,10 +70,32 @@ Directory containing AOSP signing keys. Exposed to builds as `$KEYS_DIR`.
 
 ## Deploying
 
-Add your device configuration under `devices/`, then build the image:
+Add your device configuration under `devices/`.
+
+### Initial install
+
+Build a flasher USB image (TUI-based installer):
 
 ```
-nix build 'path:.#nixosConfigurations.<device>.config.system.build.image'
+nix build 'path:.#<hostname>/flasher:x86_64'
 ```
 
-Flash the resulting image to the system disk, boot, and drop in the credential files.
+Write the result to a USB drive, boot from it, and follow the on-screen instructions.
+
+### Updating
+
+Rebuild remotely (or locally) using the device-specific configuration:
+
+```
+nixos-rebuild switch --flake 'path:.#<hostname>' --target-host root@<hostname>
+```
+
+### Building the raw image
+
+The flasher flashes the raw disk image, which can also be built directly:
+
+```
+nix build 'path:.#<hostname>/image:x86_64'
+```
+
+After first boot, drop in the credential files under `/var/credentials/`.
