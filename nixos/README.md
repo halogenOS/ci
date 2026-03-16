@@ -87,7 +87,7 @@ Write the result to a USB drive, boot from it, and follow the on-screen instruct
 Rebuild remotely (or locally) using the device-specific configuration:
 
 ```
-nixos-rebuild switch --flake 'path:.#<hostname>' --target-host root@<hostname>
+nixos-rebuild switch --flake 'path:.#<hostname>' --target-host user@<hostname> --sudo --ask-sudo-password --no-reexec
 ```
 
 ### Building the raw image
