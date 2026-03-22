@@ -75,6 +75,13 @@ in {
       description = "Directory where builds run.";
     };
 
+    manageBuildDir = lib.mkOption {
+      type = lib.types.bool;
+      default = cfg.buildDir == "/var/lib/buildkite-agent/builds";
+      defaultText = lib.literalExpression "true when buildDir is the default";
+      description = "Whether to create and manage the build directory via tmpfiles. Disable this when buildDir points to a user-managed mount or existing directory.";
+    };
+
     spawn = lib.mkOption {
       type = lib.types.int;
       default = 1;
@@ -161,9 +168,10 @@ in {
       '';
     };
 
-    systemd.tmpfiles.rules = [
+    systemd.tmpfiles.rules =
+      lib.optional cfg.manageBuildDir
       "d ${cfg.buildDir} 0755 buildkite-agent-xos buildkite-agent-xos -"
-    ] ++ lib.optional cfg.ccache.enable
+    ++ lib.optional cfg.ccache.enable
       "d ${cfg.ccache.dir} 0755 buildkite-agent-xos buildkite-agent-xos -"
     ++ lib.optional (cfg.signingKeysDir != null)
       "d ${cfg.signingKeysDir} 0755 buildkite-agent-xos buildkite-agent-xos -";
