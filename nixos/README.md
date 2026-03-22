@@ -25,8 +25,8 @@ Export any secrets your pipelines need:
 # GitHub
 export GITHUB_TOKEN="ghp_..."
 export GITHUB_USER="..."
-export GITHUB_BUILDS_OWNER="halogenOS"
-export GITHUB_BUILDS_REPO="builds"
+#export GITHUB_BUILDS_OWNER="halogenOS" → not needed for XOS
+#export GITHUB_BUILDS_REPO="builds" → not needed for XOS
 
 # Discord notifications
 export DISCORD_BOT_URL="https://..."
@@ -35,10 +35,6 @@ export DISCORD_BOT_TOKEN="..."
 # Telegram notifications
 export TG_API_KEY="..."
 export TG_CHAT_ID_DEVICE_DEVICENAME="..."
-
-# ROM metadata
-export ROM_NAME="halogenOS"
-export CHANGELOG="..."
 ```
 
 Variables matching the following patterns are automatically redacted from logs:
