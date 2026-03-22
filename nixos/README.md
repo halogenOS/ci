@@ -34,7 +34,7 @@ export DISCORD_BOT_TOKEN="..."
 
 # Telegram notifications
 export TG_API_KEY="..."
-export TG_CHAT_ID_DEVICE_DEVICENAME="..."
+export TG_CHAT_ID_DEVICE_<uppercase device name, for example GUACAMOLE>="..."
 ```
 
 Variables matching the following patterns are automatically redacted from logs:
