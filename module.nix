@@ -168,12 +168,25 @@ in {
       '';
     };
 
-    systemd.tmpfiles.rules =
-      lib.optional cfg.manageBuildDir
-      "d ${cfg.buildDir} 0755 buildkite-agent-xos buildkite-agent-xos -"
-    ++ lib.optional cfg.ccache.enable
-      "d ${cfg.ccache.dir} 0755 buildkite-agent-xos buildkite-agent-xos -"
-    ++ lib.optional (cfg.signingKeysDir != null)
-      "d ${cfg.signingKeysDir} 0755 buildkite-agent-xos buildkite-agent-xos -";
+    systemd.services.xos-buildkite-dirs = {
+      description = "Create xos-buildkite runtime directories";
+      wantedBy = [ "buildkite-agent-xos.service" ];
+      before = [ "buildkite-agent-xos.service" ];
+      after = [ "local-fs.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = let
+          rules = lib.optional cfg.manageBuildDir
+            "d ${cfg.buildDir} 0755 buildkite-agent-xos buildkite-agent-xos -"
+          ++ lib.optional cfg.ccache.enable
+            "d ${cfg.ccache.dir} 0755 buildkite-agent-xos buildkite-agent-xos -"
+          ++ lib.optional (cfg.signingKeysDir != null)
+            "d ${cfg.signingKeysDir} 0755 buildkite-agent-xos buildkite-agent-xos -";
+          confFile = pkgs.writeText "xos-buildkite-tmpfiles.conf"
+            (lib.concatStringsSep "\n" rules);
+        in "${pkgs.systemd}/bin/systemd-tmpfiles --create ${confFile}";
+      };
+    };
   };
 }
