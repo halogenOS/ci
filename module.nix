@@ -102,7 +102,7 @@ in {
 
     credentialsFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
-      default = null;
+      default = "/var/credentials/buildkite-credentials";
       description = "Path to a shell file with credential exports, sourced in the environment hook.";
     };
 

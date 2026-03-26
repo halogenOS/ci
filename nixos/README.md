@@ -57,7 +57,7 @@ Directory containing AOSP signing keys. Exposed to builds as `$KEYS_DIR`.
 | `spawn` | int | `1` | Number of parallel agents to spawn |
 | `priority` | int | `1` | Agent priority (higher = assigned work first) |
 | `noCommandEval` | bool | `true` | Disallow arbitrary console commands |
-| `credentialsFile` | null or path | `null` | Path to a shell file with credential exports, sourced in the environment hook |
+| `credentialsFile` | null or path | `/var/credentials/buildkite-credentials` | Path to a shell file with credential exports, sourced in the environment hook |
 | `signingKeysDir` | null or path | `/var/credentials/xos-signing-keys` | Path to directory containing XOS AOSP signing keys |
 | `extraPackages` | list of package | `[]` | Additional packages available to the buildkite agent |
 | `ccache.enable` | bool | `false` | Enable ccache for builds |
